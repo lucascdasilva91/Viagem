@@ -129,6 +129,10 @@
                         <span class="text-sm text-slate-400">Sua parte</span>
                         <span class="text-emerald-400 font-bold" id="total-por-pessoa">R$ 0,00</span>
                     </div>
+                    <div id="media-kml-container" class="mt-3 hidden flex items-center justify-between border-t border-white/10 pt-3">
+                        <span class="text-sm text-slate-400"><i class="fa-solid fa-gauge-high text-brand-400 mr-1"></i> Média da Viagem</span>
+                        <span class="text-brand-400 font-bold" id="media-kml">-- Km/L</span>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-2 sm:gap-3">
@@ -181,6 +185,21 @@
                         </div>
                         <input type="number" id="valor-input" step="0.01" placeholder="0,00" class="w-full bg-black/30 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white font-bold placeholder-slate-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors">
                     </div>
+                    <!-- Novos campos de gasolina -->
+                    <div id="gasolina-extras" class="flex gap-3 mt-4">
+                        <div class="relative flex-1">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fa-solid fa-gas-pump text-slate-500 text-xs"></i>
+                            </div>
+                            <input type="number" id="litros-input" step="0.01" placeholder="Litros" class="w-full bg-black/30 border border-white/10 rounded-xl py-3 pl-9 pr-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors">
+                        </div>
+                        <div class="relative flex-1">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fa-solid fa-gauge text-slate-500 text-xs"></i>
+                            </div>
+                            <input type="number" id="km-odometro-input" placeholder="KM Painel" class="w-full bg-black/30 border border-white/10 rounded-xl py-3 pl-9 pr-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors">
+                        </div>
+                    </div>
                     <input type="text" id="desc-input" placeholder="O que foi? (Opcional)" class="w-full bg-black/30 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-slate-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors">
                     <button onclick="salvarGasto()" class="w-full bg-gradient-to-r from-brand-500 to-indigo-600 hover:from-brand-400 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-brand-500/20 transition-all-custom flex items-center justify-center gap-2">
                         Registrar <i class="fa-solid fa-check"></i>
@@ -221,12 +240,27 @@
 
         <!-- RIGHT COLUMN: TRAJETO E LISTA GASTOS -->
         <div class="lg:col-span-8 flex flex-col gap-6">
+
+            <!-- TRILHA SONORA (SPOTIFY) -->
+            <div class="glass-panel rounded-3xl p-4 sm:p-6 z-20">
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="text-sm font-bold text-white flex items-center gap-2">
+                        <i class="fa-brands fa-spotify text-green-400 text-lg"></i> Trilha Sonora (Road Trip)
+                    </h2>
+                    <span class="text-[10px] text-slate-400 uppercase tracking-wider">Você pode tocar aqui</span>
+                </div>
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWYBO1MoTDhZI?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+
             
             <!-- GPS & NAVEGAÇÃO -->
             <div class="glass-panel rounded-3xl p-4 sm:p-6 relative overflow-visible z-20">
                 <div class="flex flex-col md:flex-row md:items-end gap-4">
                     <div class="flex-1 relative">
-                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Para onde vamos?</label>
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
+                            <span>Para onde vamos?</span>
+                            <span id="clima-widget" class="text-emerald-400 font-bold hidden bg-emerald-500/10 px-2 py-0.5 rounded-md"><i class="fa-solid fa-cloud-sun"></i> Buscando clima...</span>
+                        </label>
                         <div class="relative">
                             <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
                             <input type="text" id="destino-input" oninput="buscarSugestoes(this.value)" placeholder="Digite uma cidade ou endereço..." class="w-full bg-black/30 border border-white/10 rounded-xl py-3 pl-11 pr-4 text-white placeholder-slate-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors">
@@ -339,6 +373,11 @@
                 btn.classList.remove('bg-white/20', 'border-white/30', 'text-white');
                 btn.classList.add('bg-white/5', 'border-white/10', 'text-slate-400');
             });
+            const gasExtras = document.getElementById('gasolina-extras');
+            if (gasExtras) {
+                if (cat === 'Gasolina') gasExtras.classList.remove('hidden');
+                else gasExtras.classList.add('hidden');
+            }
             const btnSel = document.getElementById(`cat-btn-${cat}`);
             if (btnSel) {
                 btnSel.classList.remove('bg-white/5', 'border-white/10', 'text-slate-400');
@@ -357,12 +396,25 @@
                 return;
             }
 
+            let litros = null;
+            let kmOdo = null;
+            if (categoriaSelecionada === 'Gasolina') {
+                const lInput = document.getElementById('litros-input');
+                const kmInput = document.getElementById('km-odometro-input');
+                if (lInput && lInput.value) litros = parseFloat(lInput.value);
+                if (kmInput && kmInput.value) kmOdo = parseInt(kmInput.value);
+                if (lInput) lInput.value = '';
+                if (kmInput) kmInput.value = '';
+            }
+            
             const novoGasto = {
                 id: Date.now(),
                 categoria: categoriaSelecionada,
                 valor: valor,
                 descricao: descInput.value.trim() || categoriaSelecionada,
-                hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                litros: litros,
+                kmOdo: kmOdo
             };
 
             gastos.unshift(novoGasto);
@@ -448,6 +500,26 @@
             document.getElementById('cat-comida').innerText = `R$ ${(totCat.Comida || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
             document.getElementById('cat-hospedagem').innerText = `R$ ${(totCat.Hospedagem || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
             document.getElementById('cat-pedagio').innerText = `R$ ${(totCat.Pedágio || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
+
+            // Cálculo KM/L
+            const gasEntries = gastos.filter(g => g.categoria === 'Gasolina' && g.kmOdo && g.litros).sort((a,b) => a.kmOdo - b.kmOdo);
+            const kmlContainer = document.getElementById('media-kml-container');
+            if (gasEntries.length >= 2 && kmlContainer) {
+                kmlContainer.classList.remove('hidden');
+                const distTotal = gasEntries[gasEntries.length - 1].kmOdo - gasEntries[0].kmOdo;
+                // Soma os litros excluindo o primeiro abastecimento (que encheu o tanque pro início da medição)
+                let litrosConsumidos = 0;
+                for(let i = 1; i < gasEntries.length; i++) {
+                    litrosConsumidos += gasEntries[i].litros;
+                }
+                if (litrosConsumidos > 0 && distTotal > 0) {
+                    const kml = distTotal / litrosConsumidos;
+                    document.getElementById('media-kml').innerText = kml.toFixed(1) + ' Km/L';
+                }
+            } else if (kmlContainer) {
+                kmlContainer.classList.add('hidden');
+            }
+
             document.getElementById('cat-outros').innerText = `R$ ${(totCat.Outros || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
         }
 
@@ -498,6 +570,21 @@
             const minPrevistos = (hP * 60) + mP;
             const minReais = (hR * 60) + mR;
             const diff = minReais - minPrevistos;
+            
+            // Waze-style: Recalcula horas futuras baseado no atraso/adiantamento
+            if (diff !== 0) {
+                for (let i = index + 1; i < trajeto.length; i++) {
+                    if (trajeto[i].horaReal === null) {
+                        const [h, m] = trajeto[i].horaPrevista.split(':').map(Number);
+                        let totalMin = (h * 60) + m + diff;
+                        if (totalMin < 0) totalMin += 24 * 60;
+                        const newH = Math.floor(totalMin / 60) % 24;
+                        const newM = totalMin % 60;
+                        trajeto[i].horaPrevista = String(newH).padStart(2, '0') + ':' + String(newM).padStart(2, '0');
+                    }
+                }
+                setTimeout(() => mostrarToast(`Rota recalculada: ${diff > 0 ? '+' : ''}${diff} mins nas próximas paradas.`), 1500);
+            }
             
             let status = '';
             let code = '';
@@ -625,6 +712,7 @@
         }
 
         function renderizarTrajeto() {
+            setTimeout(tentarAtualizarClima, 500);
             const listaEl = document.getElementById('lista-trajeto');
             listaEl.innerHTML = '';
 
@@ -828,6 +916,47 @@
                 renderizarGastos();
                 renderizarTrajeto();
                 carregarChecklist();
+            }
+        }
+
+        
+        let ultimaParadaClimaId = null;
+        async function atualizarClima() {
+            if (!trajeto || trajeto.length === 0) return;
+            const proxima = trajeto.find(p => p.horaReal === null);
+            const climaEl = document.getElementById('clima-widget');
+            
+            if (proxima && proxima.lat && proxima.lon) {
+                try {
+                    climaEl.classList.remove('hidden');
+                    climaEl.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Buscando clima...`;
+                    const url = `https://api.open-meteo.com/v1/forecast?latitude=${proxima.lat}&longitude=${proxima.lon}&current=temperature_2m,weather_code`;
+                    const res = await fetch(url);
+                    const data = await res.json();
+                    
+                    const temp = Math.round(data.current.temperature_2m);
+                    const code = data.current.weather_code;
+                    
+                    let icon = 'fa-cloud-sun';
+                    if (code <= 3) icon = 'fa-sun text-yellow-400';
+                    else if (code <= 49) icon = 'fa-smog text-slate-300';
+                    else if (code <= 69) icon = 'fa-cloud-rain text-blue-400';
+                    else if (code <= 79) icon = 'fa-snowflake text-sky-200';
+                    else if (code <= 99) icon = 'fa-cloud-bolt text-purple-400';
+                    
+                    climaEl.innerHTML = `<i class="fa-solid ${icon}"></i> ${proxima.cidade.split(',')[0]}: ${temp}°C`;
+                } catch(e) {
+                    climaEl.innerHTML = `<i class="fa-solid fa-cloud-sun"></i> Clima Indisponível`;
+                }
+            } else {
+                climaEl.classList.add('hidden');
+            }
+        }
+        function tentarAtualizarClima() {
+            const proxima = trajeto.find(p => p.horaReal === null);
+            if (proxima && proxima.id !== ultimaParadaClimaId) {
+                ultimaParadaClimaId = proxima.id;
+                atualizarClima();
             }
         }
 
