@@ -1185,6 +1185,18 @@
                 contDestino.classList.remove('hidden'); contDestino.style.display = 'flex';
                 contEstrada.classList.add('hidden'); contEstrada.style.display = 'none';
             }
+
+            // Rolar a tela no celular para mostrar que a aba mudou!
+            setTimeout(() => {
+                if (window.innerWidth < 1024) {
+                    if (tab === 'estrada') {
+                        contEstrada.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else {
+                        contDestino.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            }, 100);
+    
         }
 
         function salvarTurismo() {
