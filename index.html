@@ -264,6 +264,64 @@
         <!-- RIGHT COLUMN: TRAJETO E LISTA GASTOS -->
         <div class="lg:col-span-8 relative">
             
+            
+            <!-- CONTEUDO: DESTINO (GURIRI) -->
+            <div id="conteudo-destino" class="flex flex-col gap-6 hidden" style="display: none;">
+                
+                <!-- BOAS VINDAS GURIRI -->
+                <div class="glass-panel rounded-3xl p-6 relative overflow-hidden group">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand-500/20 blur-3xl rounded-full"></div>
+                    <div class="flex items-center gap-4 mb-4 relative z-10">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center shadow-lg shadow-brand-500/30">
+                            <i class="fa-solid fa-umbrella-beach text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-white tracking-wide">Destino: Guriri - ES</h2>
+                            <p class="text-sm text-slate-400">Atrações para convencer a galera!</p>
+                        </div>
+                    </div>
+                    
+                    <!-- ATRACOES -->
+                    <div class="space-y-4 mt-6 relative z-10">
+                        <!-- Tamar -->
+                        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:bg-white/10 transition-all-custom cursor-pointer group/item">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-1 group-hover/item:scale-110 transition-transform">
+                                    <i class="fa-solid fa-turtle"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-bold text-lg">Projeto Tamar</h3>
+                                    <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+                                        Base de pesquisa das Tartarugas Marinhas! Em Guriri, o Projeto Tamar tem uma base super legal onde a gente pode ver de perto o trabalho incrível de preservação ambiental. Vai ser uma experiência única aprender sobre essas gigantes do mar e até ver os tanques. Uma parada obrigatória pra gente tirar altas fotos e apoiar a natureza!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Praia -->
+                        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:bg-white/10 transition-all-custom cursor-pointer group/item">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center shrink-0 mt-1 group-hover/item:scale-110 transition-transform">
+                                    <i class="fa-solid fa-water"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-bold text-lg">Praia de Guriri</h3>
+                                    <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+                                        A famosa praia de águas mornas! Imagina a gente relaxando na areia, tomando uma água de coco gelada e curtindo o sol. Guriri é conhecida por ter uma das orlas mais badaladas do Norte do estado. Água deliciosa pra tomar um banho e renovar as energias depois da viagem!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ANOTACOES GURIRI -->
+                <div class="glass-panel rounded-3xl p-6">
+                    <h3 class="text-white font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-pen-to-square text-brand-400"></i> Nossas Anotações</h3>
+                    <textarea id="guriri-notes" onkeyup="salvarAnotacoes()" class="w-full h-32 bg-slate-900/50 border border-white/10 rounded-xl p-4 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors resize-none" placeholder="O que não podemos esquecer de fazer lá?..."></textarea>
+                </div>
+            </div>
+
             <!-- CONTEUDO: NA ESTRADA -->
             <div id="conteudo-estrada" class="flex flex-col gap-6">
 
