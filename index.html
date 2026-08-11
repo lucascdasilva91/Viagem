@@ -1177,13 +1177,13 @@
             if (tab === 'estrada') {
                 btnEstrada.className = "px-6 py-3 rounded-xl font-bold transition-all-custom bg-brand-500 text-white shadow-lg shadow-brand-500/30 flex items-center gap-2";
                 btnDestino.className = "px-6 py-3 rounded-xl font-bold transition-all-custom bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white flex items-center gap-2";
-                contEstrada.classList.remove('hidden');
-                contDestino.classList.add('hidden');
+                contEstrada.classList.remove('hidden'); contEstrada.style.display = 'flex';
+                contDestino.classList.add('hidden'); contDestino.style.display = 'none';
             } else {
                 btnDestino.className = "px-6 py-3 rounded-xl font-bold transition-all-custom bg-brand-500 text-white shadow-lg shadow-brand-500/30 flex items-center gap-2";
                 btnEstrada.className = "px-6 py-3 rounded-xl font-bold transition-all-custom bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white flex items-center gap-2";
-                contDestino.classList.remove('hidden');
-                contEstrada.classList.add('hidden');
+                contDestino.classList.remove('hidden'); contDestino.style.display = 'flex';
+                contEstrada.classList.add('hidden'); contEstrada.style.display = 'none';
             }
         }
 
