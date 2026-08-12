@@ -337,6 +337,20 @@
                     </div>
                 </div>
 
+                <!-- ETA Calculator -->
+                <div class="bg-brand-900/40 border border-brand-500/30 rounded-2xl p-4 md:p-5 mb-4 flex flex-col sm:flex-row items-center gap-4">
+                    <div class="flex-1">
+                        <h3 class="text-white font-bold flex items-center gap-2"><i class="fa-solid fa-clock text-brand-400"></i> Previsão de Chegada</h3>
+                        <p class="text-xs text-slate-400 mt-1">Insira a hora de saída para calcular quando passarão por cada cidade.</p>
+                    </div>
+                    <div class="flex items-center gap-2 w-full sm:w-auto">
+                        <input type="time" id="hora-saida-eta" class="bg-black/40 border border-brand-500/50 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-brand-400">
+                        <button onclick="recalcularETA()" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold transition-all-custom shadow-lg shadow-brand-500/20 whitespace-nowrap">
+                            Calcular
+                        </button>
+                    </div>
+                </div>
+
                 <!-- Formulário Manual -->
                 <div class="bg-black/20 border border-white/5 rounded-2xl p-4 md:p-5 mb-8 flex flex-col md:flex-row gap-3">
                     <input type="text" id="cidade-input" placeholder="Cidade ou Ponto" class="flex-1 bg-black/30 border border-white/10 rounded-xl py-3 px-4 text-sm text-white focus:outline-none focus:border-purple-500 transition-colors">
@@ -390,16 +404,16 @@
                     { icone: 'fa-beer-mug-empty', corIcone: 'bg-yellow-500/20 text-yellow-400', titulo: 'Barzinhos e Música ao Vivo', texto: 'Pra fechar a noite com chave de ouro! A orla e o centro são lotados de barzinhos animados com música ao vivo.' }
                 ],
                 rota: [
-                    { nome: "Saída (Origem)", concluido: false },
-                    { nome: "Parada em Cristalina (GO)", concluido: false },
-                    { nome: "Paracatu (MG) - Lanche", concluido: false },
-                    { nome: "João Pinheiro (MG)", concluido: false },
-                    { nome: "Três Marias (MG) - Almoço", concluido: false },
-                    { nome: "Curvelo (MG)", concluido: false },
-                    { nome: "Diamantina (MG) - Pernoite", concluido: false },
-                    { nome: "Teófilo Otoni (MG)", concluido: false },
-                    { nome: "Nova Venécia (ES)", concluido: false },
-                    { nome: "Chegada em Guriri (ES) 🎉", concluido: false }
+                    { nome: "Valparaíso de Goiás", minutosDaOrigem: 0 },
+                    { nome: "Cristalina (GO)", minutosDaOrigem: 60 },
+                    { nome: "Paracatu (MG)", minutosDaOrigem: 180 },
+                    { nome: "João Pinheiro (MG)", minutosDaOrigem: 240 },
+                    { nome: "Três Marias (MG)", minutosDaOrigem: 360 },
+                    { nome: "Curvelo (MG)", minutosDaOrigem: 480 },
+                    { nome: "Diamantina (MG)", minutosDaOrigem: 660 },
+                    { nome: "Teófilo Otoni (MG)", minutosDaOrigem: 900 },
+                    { nome: "Nova Venécia (ES)", minutosDaOrigem: 1080 },
+                    { nome: "Guriri (ES)", minutosDaOrigem: 1140 }
                 ]
             },
             "guarapari": {
@@ -618,7 +632,8 @@
                         kmTotal: 0, 
                         curiosidade: '', 
                         lat: null, 
-                        lon: null 
+                        lon: null,
+                        minutosDaOrigem: p.minutosDaOrigem
                     };
                 });
                 salvarTrajeto();
@@ -639,6 +654,71 @@
                 mostrarToast("Rota de Volta carregada! 🏠");
             }
         }
+        // --- ETA LOGIC ---
+        function recalcularETA() {
+            const inputSaida = document.getElementById('hora-saida-eta').value;
+            if (!inputSaida) {
+                alert('Por favor, informe o horário de saída!');
+                return;
+            }
+            if (!trajeto || trajeto.length === 0) {
+                alert('Carregue uma rota primeiro para calcular os horários!');
+                return;
+            }
+
+            const [horasSaida, minutosSaida] = inputSaida.split(':').map(Number);
+            const dataBase = new Date();
+            dataBase.setHours(horasSaida, minutosSaida, 0, 0);
+
+            trajeto = trajeto.map(parada => {
+                if (parada.minutosDaOrigem !== undefined) {
+                    const dataParada = new Date(dataBase.getTime() + (parada.minutosDaOrigem * 60000));
+                    const h = String(dataParada.getHours()).padStart(2, '0');
+                    const m = String(dataParada.getMinutes()).padStart(2, '0');
+                    
+                    let diasAdicionais = dataParada.getDate() - dataBase.getDate();
+                    if (diasAdicionais < 0) diasAdicionais += 30;
+                    const indicativoDia = diasAdicionais > 0 ? ` (+${diasAdicionais}d)` : '';
+
+                    parada.horaPrevista = h + ':' + m + indicativoDia;
+                }
+                return parada;
+            });
+
+            salvarTrajeto();
+            renderizarTrajeto();
+            mostrarToast('Horários recalculados! ⏱️');
+        }
+
+        window.addEventListener('load', () => {
+            if(typeof destinosInfo !== 'undefined') {
+                if(destinosInfo['guriri']) {
+                    destinosInfo['guriri'].rota[0].minutosDaOrigem = 0;
+                    destinosInfo['guriri'].rota[1].minutosDaOrigem = 120;
+                    destinosInfo['guriri'].rota[2].minutosDaOrigem = 210;
+                    destinosInfo['guriri'].rota[3].minutosDaOrigem = 285;
+                    destinosInfo['guriri'].rota[4].minutosDaOrigem = 360;
+                    destinosInfo['guriri'].rota[5].minutosDaOrigem = 450;
+                    destinosInfo['guriri'].rota[6].minutosDaOrigem = 600;
+                    destinosInfo['guriri'].rota[7].minutosDaOrigem = 840;
+                    destinosInfo['guriri'].rota[8].minutosDaOrigem = 1020;
+                    destinosInfo['guriri'].rota[9].minutosDaOrigem = 1110;
+                }
+                
+                
+                
+                
+                
+                
+                if(destinosInfo['maceio']) {
+                    destinosInfo['maceio'].rota[0].minutosDaOrigem = 0;
+                    destinosInfo['maceio'].rota[1].minutosDaOrigem = 510;
+                    destinosInfo['maceio'].rota[2].minutosDaOrigem = 1080;
+                    destinosInfo['maceio'].rota[3].minutosDaOrigem = 1260;
+                    destinosInfo['maceio'].rota[4].minutosDaOrigem = 1440;
+                }
+            }
+        });
 
         // --- INICIALIZAÇÃO ---
         // Load on start
