@@ -865,7 +865,9 @@ const destinosInfo = {
                 alert("Por favor, selecione o destino no menu superior primeiro!");
                 return;
             }
-            if (confirm(`Deseja carregar a rota sugerida de carro para ${destinosInfo[idDestino].nome}?\n\nISSO VAI APAGAR O TRAJETO ATUAL.`)) {
+            if (confirm(`Deseja carregar a rota sugerida de carro para ${destinosInfo[idDestino].nome}?
+
+ISSO VAI APAGAR O TRAJETO ATUAL.`)) {
                 trajeto = destinosInfo[idDestino].rota.map((p, index) => {
                     return { 
                         id: Date.now() + index, 
@@ -889,7 +891,9 @@ const destinosInfo = {
         }
 
         function carregarRotaVoltaDinamica() {
-            if (confirm("Deseja carregar a rota de volta para Brasília?\n\nISSO VAI APAGAR O TRAJETO ATUAL.")) {
+            if (confirm("Deseja carregar a rota de volta para Brasília?
+
+ISSO VAI APAGAR O TRAJETO ATUAL.")) {
                 trajeto = [
                     { id: Date.now(), cidade: "Saída do Destino", horaPrevista: 'A Definir', horaReal: null, statusMsg: null, statusCode: 'pending', kmTotal: 0, curiosidade: '', lat: null, lon: null },
                     { id: Date.now()+1, cidade: "Parada no Meio do Caminho", horaPrevista: 'A Definir', horaReal: null, statusMsg: null, statusCode: 'pending', kmTotal: 0, curiosidade: '', lat: null, lon: null },
@@ -1794,7 +1798,9 @@ const destinosInfo = {
 
 // --- SPOTIFY E ABAS (FUNCOES CORRIGIDAS) ---
         function mudarPlaylist() {
-            const url = prompt("Cole o link da sua Playlist, Álbum ou Música do Spotify:\n\n(Ex: https://open.spotify.com/playlist/...)");
+            const url = prompt("Cole o link da sua Playlist, Álbum ou Música do Spotify:
+
+(Ex: https://open.spotify.com/playlist/...)");
             if (!url) return;
             
             let type = 'playlist';
@@ -2187,22 +2193,23 @@ document.addEventListener('DOMContentLoaded', () => {
     aplicarTema(temaSalvo);
     mudarTema(temaSalvo); // update ui
 });
-\n</script>
+
+</script>
 
 <div id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-slate-900/90 backdrop-blur-lg border-t border-white/10 flex justify-around p-2 z-50 pb-safe">
-    <button onclick="alternarAba('rota')" id="btn-tab-rota" class="tab-btn text-emerald-400 flex flex-col items-center p-2 transition-colors w-1/4">
+    <button onclick="switchTab('rota')" id="btn-tab-rota" class="tab-btn text-emerald-400 flex flex-col items-center p-2 transition-colors w-1/4">
         <i class="fa-solid fa-route text-xl mb-1"></i>
         <span class="text-[10px] font-medium">Rota</span>
     </button>
-    <button onclick="alternarAba('destinos')" id="btn-tab-destinos" class="tab-btn text-slate-400 hover:text-slate-200 flex flex-col items-center p-2 transition-colors w-1/4">
+    <button onclick="switchTab('destinos')" id="btn-tab-destinos" class="tab-btn text-slate-400 hover:text-slate-200 flex flex-col items-center p-2 transition-colors w-1/4">
         <i class="fa-solid fa-map-location-dot text-xl mb-1"></i>
         <span class="text-[10px] font-medium">Destinos</span>
     </button>
-    <button onclick="alternarAba('gastos')" id="btn-tab-gastos" class="tab-btn text-slate-400 hover:text-slate-200 flex flex-col items-center p-2 transition-colors w-1/4">
+    <button onclick="switchTab('gastos')" id="btn-tab-gastos" class="tab-btn text-slate-400 hover:text-slate-200 flex flex-col items-center p-2 transition-colors w-1/4">
         <i class="fa-solid fa-wallet text-xl mb-1"></i>
         <span class="text-[10px] font-medium">Gastos</span>
     </button>
-    <button onclick="alternarAba('config')" id="btn-tab-config" class="tab-btn text-slate-400 hover:text-slate-200 flex flex-col items-center p-2 transition-colors w-1/4">
+    <button onclick="switchTab('config')" id="btn-tab-config" class="tab-btn text-slate-400 hover:text-slate-200 flex flex-col items-center p-2 transition-colors w-1/4">
         <i class="fa-solid fa-palette text-xl mb-1"></i>
         <span class="text-[10px] font-medium">Tema</span>
     </button>
