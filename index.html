@@ -83,7 +83,7 @@
     <!-- OVERLAY -->
     <div class="fixed inset-0 bg-slate-950/60 backdrop-blur-[2px] z-0 pointer-events-none transition-all duration-1000" id="bg-overlay"></div>
     <!-- SIDEBAR (Menu) -->
-    <aside id="sidebar" class="fixed lg:static top-0 left-0 h-full w-72 bg-black/80 lg:bg-black/40 backdrop-blur-xl border-r border-white/10 z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col shadow-2xl">
+    <aside id="sidebar" class="hidden !hidden fixed lg:static top-0 left-0 h-full w-72 bg-black/80 lg:bg-black/40 backdrop-blur-xl border-r border-white/10 z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col shadow-2xl">
         <div class="p-6 border-b border-white/10 flex justify-between items-center bg-gradient-to-br from-black/40 to-transparent">
             <h1 class="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-indigo-400">Viagens dos doidos de Brasília</h1>
             <button onclick="toggleMenu()" class="lg:hidden text-white/70 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
@@ -154,13 +154,13 @@
     </aside>
 
     <!-- MOBILE HEADER -->
-    <div class="lg:hidden fixed top-0 left-0 w-full h-16 bg-black/50 backdrop-blur-md border-b border-white/5 z-40 flex justify-between items-center px-4 shadow-lg">
+    <div class="hidden !hidden lg:hidden fixed top-0 left-0 w-full h-16 bg-black/50 backdrop-blur-md border-b border-white/5 z-40 flex justify-between items-center px-4 shadow-lg">
         <h1 class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-indigo-400">Viagens dos doidos de Brasília</h1>
         <button onclick="toggleMenu()" class="text-white p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"><i class="fa-solid fa-bars"></i></button>
     </div>
 
     <!-- MAIN CONTENT -->
-    <main class="flex-1 relative z-10 h-full overflow-y-auto pt-24 lg:pt-8 pb-20 px-4 sm:px-6 md:px-8" id="main-content">
+    <main class="flex-1 relative z-10 h-full overflow-y-auto pt-24 pt-8 pb-20 px-4 sm:px-6 md:px-8" id="main-content">
         <div class="max-w-4xl mx-auto w-full">
             <div id="rota-tab" class="tab-content space-y-4"><section id="view-trajeto" class="view-section block animate-fade-in space-y-6"><div class="bg-brand-900/40 border border-brand-500/30 rounded-2xl p-2 md:p-3 mb-2 flex flex-col sm:flex-row items-center gap-2">
                     <div class="flex-1">
@@ -966,9 +966,7 @@ ISSO VAI APAGAR O TRAJETO ATUAL.`)) {
         }
 
         function carregarRotaVoltaDinamica() {
-            if (confirm("Deseja carregar a rota de volta para Brasília?
-
-ISSO VAI APAGAR O TRAJETO ATUAL.")) {
+            if (confirm("Deseja carregar a rota de volta para Brasília?\n\nISSO VAI APAGAR O TRAJETO ATUAL.")) {
                 trajeto = [
                     { id: Date.now(), cidade: "Saída do Destino", horaPrevista: 'A Definir', horaReal: null, statusMsg: null, statusCode: 'pending', kmTotal: 0, curiosidade: '', lat: null, lon: null },
                     { id: Date.now()+1, cidade: "Parada no Meio do Caminho", horaPrevista: 'A Definir', horaReal: null, statusMsg: null, statusCode: 'pending', kmTotal: 0, curiosidade: '', lat: null, lon: null },
@@ -1873,9 +1871,7 @@ ISSO VAI APAGAR O TRAJETO ATUAL.")) {
 
 // --- SPOTIFY E ABAS (FUNCOES CORRIGIDAS) ---
         function mudarPlaylist() {
-            const url = prompt("Cole o link da sua Playlist, Álbum ou Música do Spotify:
-
-(Ex: https://open.spotify.com/playlist/...)");
+            const url = prompt("Cole o link da sua Playlist, Álbum ou Música do Spotify:\n\n(Ex: https://open.spotify.com/playlist/...)");
             if (!url) return;
             
             let type = 'playlist';
