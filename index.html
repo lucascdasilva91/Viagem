@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programação Viagem Guriri 🚗</title>
+    <title>Programação Viagem 🚗</title>
     
     <!-- Google Fonts: Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -92,14 +92,27 @@
                     <i class="fa-solid fa-map-location-dot text-3xl text-white"></i>
                 </div>
                 <div>
-                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400 tracking-tight">Programação Viagem Guriri</h1>
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400 tracking-tight" id="titulo-app">Programação Viagem</h1>
                     <p class="text-slate-400 font-medium tracking-wide flex items-center gap-2 mt-1">
                         <span id="status-pessoas" class="bg-white/10 px-2 py-0.5 rounded-md text-xs">1 viajante</span>
                         <span>Controle de gastos e rota</span>
                     </p>
                 </div>
             </div>
-            <div class="flex gap-3 z-10">
+            
+            <div class="flex gap-3 z-10 flex-wrap justify-end">
+                <select id="seletor-destino" onchange="selecionarDestino(this.value)" class="h-12 rounded-xl bg-brand-600 border border-brand-400 hover:bg-brand-500 text-white font-bold px-4 focus:outline-none cursor-pointer shadow-lg shadow-brand-500/20">
+                    <option value="" disabled selected>Escolha o Destino</option>
+                    <option value="guriri">Guriri - ES</option>
+                    <option value="guarapari">Guarapari - ES</option>
+                    <option value="prado">Prado - BA</option>
+                    <option value="cabofrio">Cabo Frio - RJ</option>
+                    <option value="saoluis">São Luís - MA</option>
+                    <option value="codo">Codó - MA</option>
+                    <option value="ubatuba">Ubatuba - SP</option>
+                    <option value="maceio">Maceió - AL</option>
+                </select>
+    
                 <button onclick="toggleTheme()" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 flex items-center justify-center transition-all-custom group">
                     <i id="theme-icon" class="fa-solid fa-moon text-slate-400 group-hover:text-yellow-400 transition-colors"></i>
                 </button>
@@ -120,7 +133,7 @@
                 <i class="fa-solid fa-car-side"></i> Na Estrada
             </button>
             <button id="btn-tab-destino" onclick="switchTab('destino')" class="px-6 py-3 rounded-xl font-bold transition-all-custom bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white flex items-center gap-2">
-                <i class="fa-solid fa-umbrella-beach"></i> Em Guriri
+                <i class="fa-solid fa-umbrella-beach"></i> <span id="btn-destino-texto">O Destino</span>
             </button>
         </div>
 
@@ -265,151 +278,9 @@
         <div class="lg:col-span-8 relative">
             
             
-            <!-- CONTEUDO: DESTINO (GURIRI) -->
+            <!-- CONTEUDO: DESTINO DINAMICO -->
             <div id="conteudo-destino" class="flex flex-col gap-6 hidden" style="display: none;">
-                
-                <!-- BOAS VINDAS GURIRI -->
-                <div class="glass-panel rounded-3xl p-6 relative overflow-hidden group">
-                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand-500/20 blur-3xl rounded-full"></div>
-                    <div class="flex items-center gap-4 mb-4 relative z-10">
-                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center shadow-lg shadow-brand-500/30">
-                            <i class="fa-solid fa-umbrella-beach text-white text-xl"></i>
-                        </div>
-                        <div>
-                            <h2 class="text-xl font-bold text-white tracking-wide">Destino: Guriri - ES</h2>
-                            <p class="text-sm text-slate-400">Atrações para convencer a galera!</p>
-                        </div>
-                    </div>
-                    
-                    <!-- ATRACOES -->
-                    <div class="space-y-4 mt-6 relative z-10">
-                        <!-- Tamar -->
-                        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:bg-white/10 transition-all-custom cursor-pointer group/item">
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-1 group-hover/item:scale-110 transition-transform">
-                                    <i class="fa-solid fa-turtle"></i>
-                                </div>
-                                <div>
-                                    <h3 class="text-white font-bold text-lg">Projeto Tamar</h3>
-                                    <p class="text-sm text-slate-300 mt-2 leading-relaxed">
-                                        Base de pesquisa das Tartarugas Marinhas! Em Guriri, o Projeto Tamar tem uma base super legal onde a gente pode ver de perto o trabalho incrível de preservação ambiental. Vai ser uma experiência única aprender sobre essas gigantes do mar e até ver os tanques. Uma parada obrigatória pra gente tirar altas fotos e apoiar a natureza!
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Praia -->
-                        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:bg-white/10 transition-all-custom cursor-pointer group/item">
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center shrink-0 mt-1 group-hover/item:scale-110 transition-transform">
-                                    <i class="fa-solid fa-water"></i>
-                                </div>
-                                <div>
-                                    <h3 class="text-white font-bold text-lg">Praia de Guriri</h3>
-                                    <p class="text-sm text-slate-300 mt-2 leading-relaxed">
-                                        A famosa praia de águas mornas! Imagina a gente relaxando na areia, tomando uma água de coco gelada e curtindo o sol. Guriri é conhecida por ter uma das orlas mais badaladas do Norte do estado. Água deliciosa pra tomar um banho e renovar as energias depois da viagem!
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Casa Invertida -->
-                        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:bg-white/10 transition-all-custom cursor-pointer group/item">
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 mt-1 group-hover/item:scale-110 transition-transform">
-                                    <i class="fa-solid fa-house-chimney-window transform rotate-180"></i>
-                                </div>
-                                <div>
-                                    <h3 class="text-white font-bold text-lg">Casa de Cabeça pra Baixo</h3>
-                                    <p class="text-sm text-slate-300 mt-2 leading-relaxed">
-                                        Isso mesmo que você leu! Guriri tem uma Casa Invertida hilária. A gente entra pelo telhado e todos os móveis ficam no teto. É o lugar perfeito pra tirar aquelas fotos super confusas e divertidas pra postar no Instagram. Rende muita risada, não podemos deixar de ir!
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Acqua Park -->
-                        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:bg-white/10 transition-all-custom cursor-pointer group/item">
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0 mt-1 group-hover/item:scale-110 transition-transform">
-                                    <i class="fa-solid fa-person-swimming"></i>
-                                </div>
-                                <div>
-                                    <h3 class="text-white font-bold text-lg">Guriri Beach Acqua Park</h3>
-                                    <p class="text-sm text-slate-300 mt-2 leading-relaxed">
-                                        Pra quando a gente cansar do sal do mar (se é que isso é possível), tem o parque aquático! Tobogãs, piscinas de onda, rio lento... é garantia de um dia inteiro de diversão igual criança. Perfeito pra dar aquela refrescada e ter um dia de pura adrenalina!
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Passeio de Barco -->
-                        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:bg-white/10 transition-all-custom cursor-pointer group/item">
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center shrink-0 mt-1 group-hover/item:scale-110 transition-transform">
-                                    <i class="fa-solid fa-sailboat"></i>
-                                </div>
-                                <div>
-                                    <h3 class="text-white font-bold text-lg">Passeio no Rio Mariricu</h3>
-                                    <p class="text-sm text-slate-300 mt-2 leading-relaxed">
-                                        Passeio de barco sensacional pelos manguezais! A gente vai navegar pelas águas calmas, ver um pôr do sol maravilhoso e curtir uma vibe totalmente diferente da praia. Rende momentos incríveis de paz, natureza e fotos de cair o queixo no fim de tarde.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Feirinha -->
-                        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:bg-white/10 transition-all-custom cursor-pointer group/item">
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center shrink-0 mt-1 group-hover/item:scale-110 transition-transform">
-                                    <i class="fa-solid fa-store"></i>
-                                </div>
-                                <div>
-                                    <h3 class="text-white font-bold text-lg">Feirinha da Praça (Noite)</h3>
-                                    <p class="text-sm text-slate-300 mt-2 leading-relaxed">
-                                        A noite em Guriri é na Praça Wilson Gomes! É lá que rola a feirinha de artesanato, barraquinhas com comidas típicas deliciosas (tapioca, acarajé, churros) e sempre tem um movimento bacana. O point perfeito pra gente jantar, passear e comprar as lembrancinhas!
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Gastronomia -->
-                        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:bg-white/10 transition-all-custom cursor-pointer group/item">
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center shrink-0 mt-1 group-hover/item:scale-110 transition-transform">
-                                    <i class="fa-solid fa-utensils"></i>
-                                </div>
-                                <div>
-                                    <h3 class="text-white font-bold text-lg">Polo Gastronômico (Jantar)</h3>
-                                    <p class="text-sm text-slate-300 mt-2 leading-relaxed">
-                                        Guriri manda muito bem na comida! Existem dezenas de restaurantes excelentes onde podemos comer uma autêntica Moqueca Capixaba, porções gigantes de frutos do mar ou a tradicional caranguejada. Se bater a fome à noite, é só dar uma volta pelo centrinho que opção incrível não vai faltar pra jantarmos.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Barzinhos -->
-                        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:bg-white/10 transition-all-custom cursor-pointer group/item">
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl bg-yellow-500/20 text-yellow-400 flex items-center justify-center shrink-0 mt-1 group-hover/item:scale-110 transition-transform">
-                                    <i class="fa-solid fa-beer-mug-empty"></i>
-                                </div>
-                                <div>
-                                    <h3 class="text-white font-bold text-lg">Barzinhos e Música ao Vivo</h3>
-                                    <p class="text-sm text-slate-300 mt-2 leading-relaxed">
-                                        Pra fechar a noite com chave de ouro! A orla e o centro de Guriri são lotados de barzinhos animados com música ao vivo, desde aquele forró pé de serra até um sertanejo. É o esquema ideal pra gente tomar uns drinks, dar boas risadas e curtir a brisa do mar depois da praia.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ANOTACOES GURIRI -->
-                <div class="glass-panel rounded-3xl p-6">
-                    <h3 class="text-white font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-pen-to-square text-brand-400"></i> Nossas Anotações</h3>
-                    <textarea id="guriri-notes" onkeyup="salvarAnotacoes()" class="w-full h-32 bg-slate-900/50 border border-white/10 rounded-xl p-4 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors resize-none" placeholder="O que não podemos esquecer de fazer lá?..."></textarea>
-                </div>
+                <!-- Preenchido via JS -->
             </div>
 
             <!-- CONTEUDO: NA ESTRADA -->
@@ -461,12 +332,8 @@
                         <button id="btn-gps" onclick="toggleGPS()" class="bg-white/10 hover:bg-white/20 border border-white/10 text-white text-xs font-bold py-2 px-4 rounded-lg transition-all-custom flex items-center gap-2">
                             <i id="icon-gps" class="fa-solid fa-location-crosshairs text-slate-400"></i> GPS Autopilot
                         </button>
-                        <button onclick="carregarRotaGuriri()" class="bg-white/10 hover:bg-white/20 border border-white/10 text-white text-xs font-bold py-2 px-4 rounded-lg transition-all-custom flex items-center gap-2">
-                            <i class="fa-solid fa-sun text-yellow-400"></i> Rota Ida (Guriri)
-                        </button>
-                        <button onclick="carregarRotaVolta()" class="bg-white/10 hover:bg-white/20 border border-white/10 text-white text-xs font-bold py-2 px-4 rounded-lg transition-all-custom flex items-center gap-2">
-                            <i class="fa-solid fa-moon text-indigo-400"></i> Rota Volta (BSB)
-                        </button>
+                        <button onclick="carregarRotaDinamica()" class="bg-white/10 hover:bg-white/20 border border-white/10 text-white text-xs font-bold py-2 px-4 rounded-lg transition-all-custom flex items-center gap-2"><i class="fa-solid fa-sun text-yellow-400"></i> <span id="btn-rota-ida">Carregar Rota Ida</span></button>
+                        <button onclick="carregarRotaVoltaDinamica()" class="bg-white/10 hover:bg-white/20 border border-white/10 text-white text-xs font-bold py-2 px-4 rounded-lg transition-all-custom flex items-center gap-2"><i class="fa-solid fa-moon text-indigo-400"></i> Rota de Volta</button>
                     </div>
                 </div>
 
@@ -506,6 +373,276 @@
     </div>
 
     <script>
+        
+        // --- DADOS DINÂMICOS DOS DESTINOS ---
+        const destinosInfo = {
+            "guriri": {
+                nome: "Guriri - ES",
+                icone: "fa-umbrella-beach",
+                atracoes: [
+                    { icone: 'fa-turtle', corIcone: 'bg-emerald-500/20 text-emerald-400', titulo: 'Projeto Tamar', texto: 'Base de pesquisa das Tartarugas Marinhas! Uma parada obrigatória pra gente tirar altas fotos e apoiar a natureza!' },
+                    { icone: 'fa-water', corIcone: 'bg-brand-500/20 text-brand-400', titulo: 'Praia de Guriri', texto: 'A famosa praia de águas mornas! Imagina a gente relaxando na areia, tomando uma água de coco gelada e curtindo o sol.' },
+                    { icone: 'fa-house-chimney-window transform rotate-180', corIcone: 'bg-purple-500/20 text-purple-400', titulo: 'Casa de Cabeça pra Baixo', texto: 'Isso mesmo que você leu! Guriri tem uma Casa Invertida hilária. Rende muita risada e fotos pro Instagram, não podemos deixar de ir!' },
+                    { icone: 'fa-person-swimming', corIcone: 'bg-cyan-500/20 text-cyan-400', titulo: 'Guriri Beach Acqua Park', texto: 'Tobogãs, piscinas de onda, rio lento... é garantia de um dia inteiro de diversão. Perfeito pra dar aquela refrescada!' },
+                    { icone: 'fa-sailboat', corIcone: 'bg-orange-500/20 text-orange-400', titulo: 'Passeio no Rio Mariricu', texto: 'Passeio de barco sensacional pelos manguezais! A gente vai navegar pelas águas calmas, ver um pôr do sol maravilhoso.' },
+                    { icone: 'fa-store', corIcone: 'bg-pink-500/20 text-pink-400', titulo: 'Feirinha da Praça (Noite)', texto: 'A noite em Guriri é na Praça Wilson Gomes! Barracas com comidas típicas deliciosas (tapioca, acarajé, churros). O point perfeito!' },
+                    { icone: 'fa-utensils', corIcone: 'bg-red-500/20 text-red-400', titulo: 'Polo Gastronômico (Jantar)', texto: 'Dezenas de restaurantes excelentes onde podemos comer uma autêntica Moqueca Capixaba ou porções gigantes de frutos do mar.' },
+                    { icone: 'fa-beer-mug-empty', corIcone: 'bg-yellow-500/20 text-yellow-400', titulo: 'Barzinhos e Música ao Vivo', texto: 'Pra fechar a noite com chave de ouro! A orla e o centro são lotados de barzinhos animados com música ao vivo.' }
+                ],
+                rota: [
+                    { nome: "Saída (Origem)", concluido: false },
+                    { nome: "Parada em Cristalina (GO)", concluido: false },
+                    { nome: "Paracatu (MG) - Lanche", concluido: false },
+                    { nome: "João Pinheiro (MG)", concluido: false },
+                    { nome: "Três Marias (MG) - Almoço", concluido: false },
+                    { nome: "Curvelo (MG)", concluido: false },
+                    { nome: "Diamantina (MG) - Pernoite", concluido: false },
+                    { nome: "Teófilo Otoni (MG)", concluido: false },
+                    { nome: "Nova Venécia (ES)", concluido: false },
+                    { nome: "Chegada em Guriri (ES) 🎉", concluido: false }
+                ]
+            },
+            "guarapari": {
+                nome: "Guarapari - ES",
+                icone: "fa-sun",
+                atracoes: [
+                    { icone: 'fa-water', corIcone: 'bg-blue-500/20 text-blue-400', titulo: 'Praias das Castanheiras & Areia Preta', texto: 'As praias mais famosas do centro! Águas calmas, cristalinas e areia monazítica com propriedades terapêuticas. Perfeito pra gente curtir o dia inteiro relaxando.' },
+                    { icone: 'fa-mountain-sun', corIcone: 'bg-emerald-500/20 text-emerald-400', titulo: 'Pedreira Adventures Park', texto: 'Para dar um pouco de adrenalina! Um lago incrível no meio de pedreiras onde podemos fazer tirolesa, rapel ou só tirar fotos absurdas num visual de filme.' },
+                    { icone: 'fa-fish', corIcone: 'bg-red-500/20 text-red-400', titulo: 'Moqueca de Meaípe', texto: 'Não existe ir a Guarapari sem comer a melhor moqueca capixaba do Brasil! A vila de pescadores de Meaípe tem restaurantes maravilhosos pra gente jantar.' },
+                    { icone: 'fa-martini-glass', corIcone: 'bg-purple-500/20 text-purple-400', titulo: 'Beco da Fome & Multiplace Mais', texto: 'Pra matar a fome da noite baratinho no Beco, ou se quisermos ostentar numa das casas de show mais badaladas do estado (Multiplace Mais). A noite de Guarapari promete!' }
+                ],
+                rota: [
+                    { nome: "Saída (Origem)", concluido: false },
+                    { nome: "Cristalina (GO)", concluido: false },
+                    { nome: "Belo Horizonte (MG) - Pernoite", concluido: false },
+                    { nome: "João Monlevade (MG)", concluido: false },
+                    { nome: "Manhuaçu (MG)", concluido: false },
+                    { nome: "Vitória (ES) - Passagem", concluido: false },
+                    { nome: "Chegada em Guarapari (ES) 🎉", concluido: false }
+                ]
+            },
+            "prado": {
+                nome: "Prado - BA",
+                icone: "fa-tree",
+                atracoes: [
+                    { icone: 'fa-umbrella-beach', corIcone: 'bg-yellow-500/20 text-yellow-400', titulo: 'Praia da Paixão e Falésias', texto: 'Cenário de cinema! Praias emolduradas por falésias coloridas imensas. A água quentinha da Bahia com a gente tomando uma caipirinha e curtindo esse visual único do Nordeste.' },
+                    { icone: 'fa-anchor', corIcone: 'bg-blue-500/20 text-blue-400', titulo: 'Recifes de Guaratiba', texto: 'Passeio de barco inesquecível! Vamos mergulhar em piscinas naturais formadas por corais com águas transparentes cheias de peixinhos coloridos.' },
+                    { icone: 'fa-utensils', corIcone: 'bg-orange-500/20 text-orange-400', titulo: 'Beco das Garrafas', texto: 'O point da noite em Prado! Uma ruela de pedra super charmosa cheia de restaurantes, música ao vivo e pratos de frutos do mar que vão fazer a gente chorar de tão bons.' }
+                ],
+                rota: [
+                    { nome: "Saída (Origem)", concluido: false },
+                    { nome: "Montes Claros (MG) - Pernoite", concluido: false },
+                    { nome: "Itaobim (MG)", concluido: false },
+                    { nome: "Teixeira de Freitas (BA)", concluido: false },
+                    { nome: "Alcobaça (BA)", concluido: false },
+                    { nome: "Chegada em Prado (BA) 🎉", concluido: false }
+                ]
+            },
+            "cabofrio": {
+                nome: "Cabo Frio - RJ",
+                icone: "fa-sun",
+                atracoes: [
+                    { icone: 'fa-water', corIcone: 'bg-cyan-500/20 text-cyan-400', titulo: 'Praia do Forte & Dunas', texto: 'A praia mais famosa da região! Areia tão branca e fina que parece farinha, e um mar cristalino de doer os olhos. E ainda tem as dunas pra gente fazer umas fotos saltando e curtindo!' },
+                    { icone: 'fa-island-tropical', corIcone: 'bg-emerald-500/20 text-emerald-400', titulo: 'Ilha do Japonês', texto: 'O verdadeiro paraíso escondido. Um mar extremamente calmo e raso, perfeito pra atravessar caminhando ou de caiaque. Água deliciosa pra passar a tarde inteira boiando sem preocupação.' },
+                    { icone: 'fa-store', corIcone: 'bg-red-500/20 text-red-400', titulo: 'Rua dos Biquínis', texto: 'Pra quem quiser fazer umas comprinhas, é o maior polo de moda praia da América Latina! Tem biquíni e sunga barata de tudo que é cor pra gente renovar o estilo da viagem.' },
+                    { icone: 'fa-martini-glass-citrus', corIcone: 'bg-purple-500/20 text-purple-400', titulo: 'Boulevard Canal', texto: 'A vida noturna é aqui! Bares, restaurantes chiques e pubs com música ao vivo de frente pro canal. É onde a galera se reúne à noite pra beber, conversar e ver o movimento.' }
+                ],
+                rota: [
+                    { nome: "Saída (Origem)", concluido: false },
+                    { nome: "Belo Horizonte (MG) - Pernoite", concluido: false },
+                    { nome: "Juiz de Fora (MG)", concluido: false },
+                    { nome: "Petrópolis (RJ)", concluido: false },
+                    { nome: "São Pedro da Aldeia (RJ)", concluido: false },
+                    { nome: "Chegada em Cabo Frio (RJ) 🎉", concluido: false }
+                ]
+            },
+            "saoluis": {
+                nome: "São Luís - MA",
+                icone: "fa-landmark",
+                atracoes: [
+                    { icone: 'fa-archway', corIcone: 'bg-orange-500/20 text-orange-400', titulo: 'Centro Histórico (Reviver)', texto: 'Vamos nos sentir voltando no tempo caminhando pelas ruas de pedra e casarões azulejados. E de noite, é claro, tem o lendário Reggae de rua maranhense! O clima lá é mágico.' },
+                    { icone: 'fa-water', corIcone: 'bg-blue-500/20 text-blue-400', titulo: 'Praia do Calhau & Litorânea', texto: 'A orla tem quiosques sensacionais padronizados. A gente senta de frente pro mar tomando uma cerveja gelada, comendo caranguejo e curtindo a brisa forte que só o Maranhão tem.' },
+                    { icone: 'fa-headphones', corIcone: 'bg-green-500/20 text-green-400', titulo: 'A Jamaica Brasileira', texto: 'Temos que dançar um reggae agarradinho (ou tentar)! São Luís tem os famosos radiolas (Paredões de som de reggae) que são uma experiência cultural absurda que a gente precisa viver!' }
+                ],
+                rota: [
+                    { nome: "Saída (Origem)", concluido: false },
+                    { nome: "Alvorada do Norte (GO)", concluido: false },
+                    { nome: "Palmas (TO) - Pernoite", concluido: false },
+                    { nome: "Araguaína (TO)", concluido: false },
+                    { nome: "Imperatriz (MA) - Pernoite", concluido: false },
+                    { nome: "Santa Inês (MA)", concluido: false },
+                    { nome: "Chegada em São Luís (MA) 🎉", concluido: false }
+                ]
+            },
+            "codo": {
+                nome: "Codó - MA",
+                icone: "fa-map-location-dot",
+                atracoes: [
+                    { icone: 'fa-water', corIcone: 'bg-cyan-500/20 text-cyan-400', titulo: 'Balneário do Rio Itapecuru', texto: 'Vamos tomar aquele banho de rio geladinho pra espantar o calor do Maranhão! Os balneários têm uma estrutura simples mas perfeita pra comer um peixe frito com os pés na água.' },
+                    { icone: 'fa-masks-theater', corIcone: 'bg-purple-500/20 text-purple-400', titulo: 'Tradição e Cultura Afro', texto: 'Codó é famosa nacionalmente por sua rica tradição cultural e matrizes africanas. Conhecer a história do Bita do Barão e a essência folclórica maranhense é essencial na cidade!' },
+                    { icone: 'fa-tree-city', corIcone: 'bg-green-500/20 text-green-400', titulo: 'Praça de São Sebastião', texto: 'A clássica vida de interior! À noite, a praça é o ponto de encontro da cidade inteira. Vamos comer um lanche nas barraquinhas, tomar um sorvete e jogar conversa fora sentindo o clima da cidade.' }
+                ],
+                rota: [
+                    { nome: "Saída (Origem)", concluido: false },
+                    { nome: "Alvorada do Norte (GO)", concluido: false },
+                    { nome: "Palmas (TO) - Pernoite", concluido: false },
+                    { nome: "Carolina (MA) - Passagem", concluido: false },
+                    { nome: "Presidente Dutra (MA)", concluido: false },
+                    { nome: "Chegada em Codó (MA) 🎉", concluido: false }
+                ]
+            },
+            "ubatuba": {
+                nome: "Ubatuba - SP",
+                icone: "fa-water",
+                atracoes: [
+                    { icone: 'fa-water', corIcone: 'bg-blue-500/20 text-blue-400', titulo: 'Praia de Itamambuca', texto: 'Uma das praias mais lindas de São Paulo! Com um encontro perfeito do rio com o mar. Ideal pra dar uns mergulhos, tentar surfar ou só ficar admirando a mata atlântica preservada.' },
+                    { icone: 'fa-fish-fins', corIcone: 'bg-emerald-500/20 text-emerald-400', titulo: 'Ilha das Couves', texto: 'Passeio de barco pra um dos lugares com a água mais transparente do estado. A gente pega a lancha em Picinguaba e passa o dia mergulhando e vendo peixes num cenário caribenho!' },
+                    { icone: 'fa-ice-cream', corIcone: 'bg-pink-500/20 text-pink-400', titulo: 'Rua Guarani (Noite)', texto: 'O centrinho mais agitado da região. Fica lotado à noite! Tem barzinhos com música ao vivo, creperias, lojas de artesanato e o melhor: vamos nos entupir de sorvete do Pistache. A vibe é nota 1000.' }
+                ],
+                rota: [
+                    { nome: "Saída (Origem)", concluido: false },
+                    { nome: "Uberlândia (MG) - Pernoite", concluido: false },
+                    { nome: "Campinas (SP)", concluido: false },
+                    { nome: "São José dos Campos (SP)", concluido: false },
+                    { nome: "Chegada em Ubatuba (SP) 🎉", concluido: false }
+                ]
+            },
+            "maceio": {
+                nome: "Maceió - AL",
+                icone: "fa-umbrella-beach",
+                atracoes: [
+                    { icone: 'fa-sailboat', corIcone: 'bg-cyan-500/20 text-cyan-400', titulo: 'Piscinas Naturais de Pajuçara', texto: 'O cartão postal supremo! A gente pega uma jangada cedinho, vai até o meio do mar e cai naquelas piscinas de água morna e verde-esmeralda cheias de peixes. Experiência surreal de boa.' },
+                    { icone: 'fa-sun', corIcone: 'bg-yellow-500/20 text-yellow-400', titulo: 'Praia do Francês & Gunga', texto: 'Praias de filme no litoral sul. O Gunga tem falésias gigantes onde a gente pode alugar um buggy e voar pelas areias coloridas. O Francês tem uma barreira de corais que faz o mar parecer uma lagoa.' },
+                    { icone: 'fa-person-walking', corIcone: 'bg-emerald-500/20 text-emerald-400', titulo: 'Orla Noturna e Feirinha', texto: 'A orla de Maceió é considerada a mais bonita do Brasil. De noite é super iluminada, segura, cheia de quiosques de tapioca, música ao vivo e a famosa feirinha de artesanato pra gastarmos (ou não rs).' }
+                ],
+                rota: [
+                    { nome: "Saída (Origem)", concluido: false },
+                    { nome: "Barreiras (BA) - Pernoite", concluido: false },
+                    { nome: "Feira de Santana (BA)", concluido: false },
+                    { nome: "Aracaju (SE) - Pernoite", concluido: false },
+                    { nome: "Chegada em Maceió (AL) 🎉", concluido: false }
+                ]
+            }
+        };
+
+        function selecionarDestino(idDestino) {
+            if (!idDestino || !destinosInfo[idDestino]) return;
+            
+            const info = destinosInfo[idDestino];
+            
+            // 1. Atualizar Header e Aba
+            document.getElementById('titulo-app').innerHTML = "Programação Viagem - " + info.nome.split(' ')[0];
+            document.getElementById('btn-destino-texto').innerText = "Em " + info.nome.split(' ')[0];
+            
+            // 2. Atualizar Botão Rota
+            const btnRotaIda = document.getElementById('btn-rota-ida');
+            if(btnRotaIda) btnRotaIda.innerText = "Rota Ida (" + info.nome.split(' ')[0] + ")";
+
+            // 3. Montar HTML das Atrações
+            let atracoesHTML = "";
+            info.atracoes.forEach(a => {
+                atracoesHTML += `
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:bg-white/10 transition-all-custom cursor-pointer group/item">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl ${a.corIcone} flex items-center justify-center shrink-0 mt-1 group-hover/item:scale-110 transition-transform">
+                            <i class="fa-solid ${a.icone}"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-white font-bold text-lg">${a.titulo}</h3>
+                            <p class="text-sm text-slate-300 mt-2 leading-relaxed">${a.texto}</p>
+                        </div>
+                    </div>
+                </div>`;
+            });
+
+            // 4. Injetar no Conteúdo Destino
+            const htmlFinal = `
+                <div class="glass-panel rounded-3xl p-6 relative overflow-hidden group">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand-500/20 blur-3xl rounded-full"></div>
+                    <div class="flex items-center gap-4 mb-4 relative z-10">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center shadow-lg shadow-brand-500/30">
+                            <i class="fa-solid ${info.icone} text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-white tracking-wide">Destino: ${info.nome}</h2>
+                            <p class="text-sm text-slate-400">Atrações para convencer a galera!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4 mt-6 relative z-10">
+                        ${atracoesHTML}
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-3xl p-6">
+                    <h3 class="text-white font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-pen-to-square text-brand-400"></i> Nossas Anotações</h3>
+                    <textarea id="destino-notes" onkeyup="salvarAnotacoesDestino()" class="w-full h-32 bg-slate-900/50 border border-white/10 rounded-xl p-4 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors resize-none" placeholder="O que não podemos esquecer de fazer lá?..."></textarea>
+                </div>
+            `;
+            
+            document.getElementById('conteudo-destino').innerHTML = htmlFinal;
+
+            // 5. Salvar no localStorage
+            localStorage.setItem('viagem_destino_id', idDestino);
+            
+            // 6. Carregar anotações salvas
+            const txt = localStorage.getItem('viagem_' + idDestino + '_notas');
+            if (txt) {
+                const notes = document.getElementById('destino-notes');
+                if (notes) notes.value = txt;
+            }
+        }
+
+        function salvarAnotacoesDestino() {
+            const idDestino = localStorage.getItem('viagem_destino_id');
+            if(!idDestino) return;
+            const txt = document.getElementById('destino-notes').value;
+            localStorage.setItem('viagem_' + idDestino + '_notas', txt);
+        }
+
+        function carregarRotaDinamica() {
+            const idDestino = localStorage.getItem('viagem_destino_id');
+            if(!idDestino || !destinosInfo[idDestino]) {
+                alert("Por favor, selecione o destino no menu superior primeiro!");
+                return;
+            }
+            if (confirm(`Deseja carregar a rota sugerida de carro para ${destinosInfo[idDestino].nome}?
+
+ISSO VAI APAGAR O TRAJETO ATUAL.`)) {
+                trajeto = [...destinosInfo[idDestino].rota];
+                salvarTrajeto();
+                renderizarTrajeto();
+                mostrarToast("Rota de Ida carregada! 🚗");
+            }
+        }
+
+        function carregarRotaVoltaDinamica() {
+            if (confirm("Deseja carregar a rota de volta para Brasília?
+
+ISSO VAI APAGAR O TRAJETO ATUAL.")) {
+                trajeto = [
+                    { nome: "Saída do Destino", concluido: false },
+                    { nome: "Parada no Meio do Caminho", concluido: false },
+                    { nome: "Chegada em Brasília (BSB) 🏠", concluido: false }
+                ];
+                salvarTrajeto();
+                renderizarTrajeto();
+                mostrarToast("Rota de Volta carregada! 🏠");
+            }
+        }
+
+        // --- INICIALIZAÇÃO ---
+        // Load on start
+        window.addEventListener('load', () => {
+            const savedDestino = localStorage.getItem('viagem_destino_id');
+            if(savedDestino) {
+                const select = document.getElementById('seletor-destino');
+                if(select) select.value = savedDestino;
+                selecionarDestino(savedDestino);
+            }
+        });
+    
+
         // --- ESTADO GLOBAL ---
         let gastos = JSON.parse(localStorage.getItem('viagem_gastos')) || [];
         let trajeto = JSON.parse(localStorage.getItem('viagem_trajeto')) || [];
