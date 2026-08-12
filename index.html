@@ -1003,8 +1003,9 @@ const destinosInfo = {
 
             // Esconde autocomplete ao clicar fora
             document.addEventListener('click', (e) => {
-                if (!e.target.closest('#destino-input') && !e.target.closest('#autocomplete-list')) {
-                    document.getElementById('autocomplete-list').classList.add('hidden');
+                const autoList = document.getElementById('autocomplete-list');
+                if (autoList && !e.target.closest('#destino-input') && !e.target.closest('#autocomplete-list')) {
+                    autoList.classList.add('hidden');
                 }
             });
             initTheme();
