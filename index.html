@@ -196,7 +196,7 @@
                     <span id="btn-qtd-pessoas" class="text-white">1</span>
                 </button>
                 <button onclick="exportarBackup()" class="w-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20 flex items-center justify-center transition-all-custom group h-10" title="Fazer Backup (Salvar offline)">
-                    <i class="fa-solid fa-download text-emerald-400"></i>
+                    <i class="fa-solid fa-download text-brand-400"></i>
                 </button>
                 <button onclick="limparDados()" class="w-12 rounded-xl bg-rose-500/10 border border-rose-500/20 hover:bg-rose-500/20 flex items-center justify-center transition-all-custom group h-10" title="Zerar Viagem">
                     <i class="fa-solid fa-power-off text-rose-400 group-hover:text-rose-300"></i>
@@ -296,10 +296,10 @@
     <!-- Media KM/L -->
     <div id="media-kml-container" class="hidden bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-3 flex items-center justify-between">
         <div class="flex items-center gap-2">
-            <i class="fa-solid fa-leaf text-emerald-400"></i>
+            <i class="fa-solid fa-leaf text-brand-400"></i>
             <span class="text-xs text-slate-300 font-bold uppercase tracking-wider">Média Combustível</span>
         </div>
-        <span class="text-sm font-bold text-emerald-400" id="media-kml">-- km/L</span>
+        <span class="text-sm font-bold text-brand-400" id="media-kml">-- km/L</span>
     </div>
 </div>
 
@@ -362,7 +362,7 @@
                             <button onclick="pesquisarRestaurante('cafe')" class="flex-1 bg-white/5 hover:bg-white/10 text-slate-300 text-[10px] py-2 rounded-lg transition-colors border border-white/5"><i class="fa-brands fa-google mr-1"></i> Pesquisar</button>
                             <button onclick="definirRestaurante('cafe')" class="flex-1 bg-orange-500/20 hover:bg-orange-500/30 text-orange-300 text-[10px] py-2 rounded-lg transition-colors border border-orange-500/20"><i class="fa-solid fa-pen mr-1"></i> Escolher</button>
                         </div>
-                        <div id="restaurante-salvo-cafe" class="mt-2 text-xs text-emerald-400 font-medium hidden text-center truncate bg-emerald-500/10 rounded py-1 px-2 border border-emerald-500/20"></div>
+                        <div id="restaurante-salvo-cafe" class="mt-2 text-xs text-brand-400 font-medium hidden text-center truncate bg-emerald-500/10 rounded py-1 px-2 border border-emerald-500/20"></div>
                     </div>
                     
                     <!-- Almoço -->
@@ -375,7 +375,7 @@
                             <button onclick="pesquisarRestaurante('almoco')" class="flex-1 bg-white/5 hover:bg-white/10 text-slate-300 text-[10px] py-2 rounded-lg transition-colors border border-white/5"><i class="fa-brands fa-google mr-1"></i> Pesquisar</button>
                             <button onclick="definirRestaurante('almoco')" class="flex-1 bg-red-500/20 hover:bg-red-500/30 text-red-300 text-[10px] py-2 rounded-lg transition-colors border border-red-500/20"><i class="fa-solid fa-pen mr-1"></i> Escolher</button>
                         </div>
-                        <div id="restaurante-salvo-almoco" class="mt-2 text-xs text-emerald-400 font-medium hidden text-center truncate bg-emerald-500/10 rounded py-1 px-2 border border-emerald-500/20"></div>
+                        <div id="restaurante-salvo-almoco" class="mt-2 text-xs text-brand-400 font-medium hidden text-center truncate bg-emerald-500/10 rounded py-1 px-2 border border-emerald-500/20"></div>
                     </div>
                 </div>
             </div></section><section id="view-musica" class="view-section hidden animate-fade-in space-y-6"><div class="glass-panel rounded-3xl z-20 p-3 sm:p-4">
@@ -397,7 +397,7 @@
     <div id="gastos-tab" class="tab-content hidden space-y-4">
         <div class="glass-panel rounded-3xl p-4">
             <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-wallet text-emerald-400"></i> Controle de Gastos
+                <i class="fa-solid fa-wallet text-brand-400"></i> Controle de Gastos
             </h2>
             <div class="space-y-4">
                 <div>
@@ -408,7 +408,7 @@
                 <div class="bg-black/20 rounded-xl p-3 border border-white/5">
                     <div class="flex justify-between text-xs mb-1">
                         <span class="text-slate-300">Gasto Atual</span>
-                        <span id="gasto-atual-texto" class="text-emerald-400 font-bold">R$ 0,00</span>
+                        <span id="gasto-atual-texto" class="text-brand-400 font-bold">R$ 0,00</span>
                     </div>
                     <div class="w-full bg-slate-800 rounded-full h-2">
                         <div id="gasto-barra" class="bg-emerald-500 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
@@ -479,7 +479,7 @@
                 </button>
             </div>
             
-            <p id="local-salvo-status" class="text-emerald-400 text-sm font-medium mt-2 hidden"><i class="fa-solid fa-check-circle mr-1"></i>Localização salva!</p>
+            <p id="local-salvo-status" class="text-brand-400 text-sm font-medium mt-2 hidden"><i class="fa-solid fa-check-circle mr-1"></i>Localização salva!</p>
 
             <div class="pt-6 mt-6 border-t border-white/10 space-y-3">
                 <button onclick="abrirWaze()" class="w-full h-16 bg-[#33ccff] hover:bg-[#2eb8e6] text-slate-900 font-extrabold rounded-2xl flex items-center justify-center gap-3 transition-colors shadow-lg shadow-[#33ccff]/20 text-lg">
@@ -494,7 +494,7 @@
 </div>
 
 <div id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-slate-900/90 backdrop-blur-lg border-t border-white/10 flex justify-around p-2 z-50 pb-safe">
-    <button onclick="switchTab('rota')" id="btn-tab-rota" class="tab-btn text-emerald-400 flex flex-col items-center p-2 transition-colors flex-1">
+    <button onclick="switchTab('rota')" id="btn-tab-rota" class="tab-btn text-brand-400 flex flex-col items-center p-2 transition-colors flex-1">
         <i class="fa-solid fa-route text-xl mb-1"></i>
         <span class="text-[10px] font-medium">Rota</span>
     </button>
@@ -594,6 +594,23 @@ window.addEventListener('load', () => {
         if (input) input.value = homeAddr;
     }
 });
+
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    const tabEl = document.getElementById(tabId + '-tab');
+    if(tabEl) tabEl.classList.remove('hidden');
+    
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('text-brand-400');
+        btn.classList.add('text-slate-400');
+    });
+    
+    const btn = document.getElementById('btn-tab-' + tabId);
+    if(btn) {
+        btn.classList.remove('text-slate-400');
+        btn.classList.add('text-brand-400');
+    }
+}
 </script>
 
 </body></html>
