@@ -940,9 +940,11 @@ const destinosInfo = {
                 alert("Por favor, selecione o destino no menu superior primeiro!");
                 return;
             }
-            if (confirm(`Deseja carregar a rota sugerida de carro para ${destinosInfo[idDestino].nome}?
-
-ISSO VAI APAGAR O TRAJETO ATUAL.`)) {
+            if (idDestino === 'guriri') {
+                carregarRotaGuriri();
+                return;
+            }
+            if (confirm(`Deseja carregar a rota sugerida de carro para ${destinosInfo[idDestino].nome}?\n\nISSO VAI APAGAR O TRAJETO ATUAL.`)) {
                 trajeto = destinosInfo[idDestino].rota.map((p, index) => {
                     return { 
                         id: Date.now() + index, 
