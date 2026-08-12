@@ -204,7 +204,7 @@
                 <div class="relative border-l-2 border-slate-800 ml-3 md:ml-4 space-y-6" id="lista-trajeto">
                     <!-- Itens renderizados via JS -->
                 </div>
-            </div></section>
+            </div><div id="conteudo-destino" class="flex flex-col gap-6 mt-8 w-full"></div></section>
             <section id="view-gastos" class="view-section hidden animate-fade-in space-y-6">
 <!-- RESUMO WIDGET -->
 <div class="glass-panel rounded-3xl p-4 sm:p-6 z-20">
@@ -762,8 +762,10 @@
             const info = destinosInfo[idDestino];
             
             // 1. Atualizar Header e Aba
-            document.getElementById('titulo-app').innerHTML = "Programação Viagem - " + info.nome.split(' ')[0];
-            document.getElementById('btn-destino-texto').innerText = "Em " + info.nome.split(' ')[0];
+            
+    const btnDestino = document.getElementById('btn-destino-texto');
+    if (btnDestino) btnDestino.innerText = "Em " + info.nome.split(' ')[0];
+
             
             // 2. Atualizar Botão Rota
             const btnRotaIda = document.getElementById('btn-rota-ida');
@@ -811,7 +813,12 @@
                 </div>
             `;
             
-            document.getElementById('conteudo-destino').innerHTML = htmlFinal;
+            
+    const contDestino = document.getElementById('conteudo-destino');
+    if (contDestino) {
+        contDestino.innerHTML = htmlFinal;
+    }
+
 
             // 5. Salvar no localStorage
             localStorage.setItem('viagem_destino_id', idDestino);
@@ -1005,22 +1012,41 @@
             }
         }
 
-        function salvarGasto() {
-            const valorInput = document.getElementById('valor-input');
-            const descInput = document.getElementById('desc-input');
+        
+        function toggleGasolinaFields() {
+            const cat = document.getElementById('cat-gasto').value;
+            const gasFields = document.getElementById('gasolina-fields');
+            if (cat === 'Gasolina') {
+                gasFields.classList.remove('hidden');
+                gasFields.classList.add('grid');
+            } else {
+                gasFields.classList.add('hidden');
+                gasFields.classList.remove('grid');
+            }
+        }
+
+        function adicionarGasto() {
+            const valorInput = document.getElementById('valor-gasto');
+            const descInput = document.getElementById('desc-gasto');
+            const catSelect = document.getElementById('cat-gasto');
+            
+            if (!valorInput) return;
+
             const valorStr = valorInput.value.replace(',', '.');
             const valor = parseFloat(valorStr);
 
             if (isNaN(valor) || valor <= 0) {
-                alert('Informe um valor válido!');
+                alert('Informe um valor vǭlido!');
                 return;
             }
 
             let litros = null;
             let kmOdo = null;
-            if (categoriaSelecionada === 'Gasolina') {
-                const lInput = document.getElementById('litros-input');
-                const kmInput = document.getElementById('km-odometro-input');
+            const categoria = catSelect ? catSelect.value : 'Outros';
+            
+            if (categoria === 'Gasolina') {
+                const lInput = document.getElementById('gas-litros');
+                const kmInput = document.getElementById('gas-km');
                 if (lInput && lInput.value) litros = parseFloat(lInput.value);
                 if (kmInput && kmInput.value) kmOdo = parseInt(kmInput.value);
                 if (lInput) lInput.value = '';
@@ -1029,9 +1055,9 @@
             
             const novoGasto = {
                 id: Date.now(),
-                categoria: categoriaSelecionada,
+                categoria: categoria,
                 valor: valor,
-                descricao: descInput.value.trim() || categoriaSelecionada,
+                descricao: descInput.value.trim() || categoria,
                 hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
                 litros: litros,
                 kmOdo: kmOdo
@@ -1044,8 +1070,9 @@
             descInput.value = '';
             
             renderizarGastos();
+            mostrarToast("Gasto registrado!");
         }
-
+        
         function deletarGasto(id) {
             gastos = gastos.filter(g => g.id !== id);
             localStorage.setItem('viagem_gastos', JSON.stringify(gastos));
@@ -1054,11 +1081,11 @@
 
         function renderizarGastos() {
             const listaEl = document.getElementById('lista-gastos');
-            const totalGeralEl = document.getElementById('total-geral');
-            const totalPessoaEl = document.getElementById('total-por-pessoa');
-            const qtdItensEl = document.getElementById('qtd-itens');
+            const totalGeralEl = document.getElementById('total-gasto');
+            const totalPessoaEl = document.getElementById('total-por-pessoa'); // Can be null in new UI
+            const qtdItensEl = document.getElementById('contador-gastos');
 
-            listaEl.innerHTML = '';
+            if (listaEl) listaEl.innerHTML = '';
             
             let totalGeral = 0;
             let totCat = { Gasolina: 0, Cachaça: 0, Comida: 0, Hospedagem: 0, Pedágio: 0, Outros: 0 };
@@ -1111,15 +1138,15 @@
                     </div>`;
             }
 
-            totalGeralEl.innerText = totalGeral.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            totalPessoaEl.innerText = `R$ ${(totalGeral / qtdPessoas).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-            qtdItensEl.innerText = `${gastos.length} ${gastos.length === 1 ? 'item' : 'itens'}`;
+            if (totalGeralEl) totalGeralEl.innerText = 'R$ ' + totalGeral.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            if (totalPessoaEl) totalPessoaEl.innerText = `R$ ${(totalGeral / qtdPessoas).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            if (qtdItensEl) qtdItensEl.innerText = `${gastos.length} ${gastos.length === 1 ? 'item' : 'itens'}`;
 
-            document.getElementById('cat-gasolina').innerText = `R$ ${(totCat.Gasolina || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
-            document.getElementById('cat-cachaca').innerText = `R$ ${(totCat.Cachaça || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
-            document.getElementById('cat-comida').innerText = `R$ ${(totCat.Comida || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
-            document.getElementById('cat-hospedagem').innerText = `R$ ${(totCat.Hospedagem || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
-            document.getElementById('cat-pedagio').innerText = `R$ ${(totCat.Pedágio || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
+            document.getElementById('cat-gasolina')?.innerText = `R$ ${(totCat.Gasolina || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
+            document.getElementById('cat-cachaca')?.innerText = `R$ ${(totCat.Cachaça || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
+            document.getElementById('cat-comida')?.innerText = `R$ ${(totCat.Comida || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
+            document.getElementById('cat-hospedagem')?.innerText = `R$ ${(totCat.Hospedagem || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
+            document.getElementById('cat-pedagio')?.innerText = `R$ ${(totCat.Pedágio || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
 
             // Cálculo KM/L
             const gasEntries = gastos.filter(g => g.categoria === 'Gasolina' && g.kmOdo && g.litros).sort((a,b) => a.kmOdo - b.kmOdo);
@@ -1140,7 +1167,7 @@
                 kmlContainer.classList.add('hidden');
             }
 
-            document.getElementById('cat-outros').innerText = `R$ ${(totCat.Outros || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
+            document.getElementById('cat-outros')?.innerText = `R$ ${(totCat.Outros || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
         }
 
         // --- MÓDULO: DIÁRIO DE BORDO ---
@@ -1352,10 +1379,10 @@
                 let statusBadge = '';
                 // Inject badge for food
                 let foodBadge = '';
-                if (typeof cidadeCafeAtual !== 'undefined' && cidadeCafeAtual && parada.nome.includes(cidadeCafeAtual)) {
+                if (typeof cidadeCafeAtual !== 'undefined' && cidadeCafeAtual && parada.cidade && parada.cidade.includes(cidadeCafeAtual)) {
                     foodBadge = '<span class="ml-2 text-[10px] bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded border border-orange-500/30"><i class="fa-solid fa-mug-hot"></i> Café</span>';
                 }
-                if (typeof cidadeAlmocoAtual !== 'undefined' && cidadeAlmocoAtual && parada.nome.includes(cidadeAlmocoAtual)) {
+                if (typeof cidadeAlmocoAtual !== 'undefined' && cidadeAlmocoAtual && parada.cidade && parada.cidade.includes(cidadeAlmocoAtual)) {
                     foodBadge = '<span class="ml-2 text-[10px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded border border-red-500/30"><i class="fa-solid fa-burger"></i> Almoço</span>';
                 }
 
