@@ -126,16 +126,25 @@
 
 
         <!-- TAB NAVIGATION -->
-        <div class="lg:col-span-12 flex justify-center gap-4 relative z-10 -mt-2 mb-2">
-            <button id="btn-tab-estrada" onclick="switchTab('estrada')" class="px-6 py-3 rounded-xl font-bold transition-all-custom bg-brand-500 text-white shadow-lg shadow-brand-500/30 flex items-center gap-2">
-                <i class="fa-solid fa-car-side"></i> Na Estrada
+        <div class="lg:col-span-12 flex flex-wrap justify-center gap-3 relative z-10 -mt-2 mb-2">
+            <button id="btn-tab-rotas" onclick="switchTab('rotas')" class="tab-btn active px-5 py-2.5 rounded-xl font-bold transition-all-custom flex items-center gap-2 text-sm sm:text-base bg-brand-500 text-white shadow-lg shadow-brand-500/30">
+                <i class="fa-solid fa-car-side"></i> Rotas
             </button>
-            <button id="btn-tab-destino" onclick="switchTab('destino')" class="px-6 py-3 rounded-xl font-bold transition-all-custom bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white flex items-center gap-2">
-                <i class="fa-solid fa-umbrella-beach"></i> <span id="btn-destino-texto">O Destino</span>
+            <button id="btn-tab-destinos" onclick="switchTab('destinos')" class="tab-btn px-5 py-2.5 rounded-xl font-bold transition-all-custom flex items-center gap-2 text-sm sm:text-base bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white">
+                <i class="fa-solid fa-umbrella-beach"></i> <span id="btn-destino-texto">Destinos</span>
+            </button>
+            <button id="btn-tab-gastos" onclick="switchTab('gastos')" class="tab-btn px-5 py-2.5 rounded-xl font-bold transition-all-custom flex items-center gap-2 text-sm sm:text-base bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white">
+                <i class="fa-solid fa-wallet"></i> Gastos
+            </button>
+            <button id="btn-tab-casa" onclick="switchTab('casa')" class="tab-btn px-5 py-2.5 rounded-xl font-bold transition-all-custom flex items-center gap-2 text-sm sm:text-base bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white">
+                <i class="fa-solid fa-house-chimney"></i> Voltar pra Casa
+            </button>
+            <button id="btn-tab-temas" onclick="switchTab('temas')" class="tab-btn px-5 py-2.5 rounded-xl font-bold transition-all-custom flex items-center gap-2 text-sm sm:text-base bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white">
+                <i class="fa-solid fa-palette"></i> Temas
             </button>
         </div>
 
-        <!-- LEFT COLUMN: FINANCEIRO -->
+        <!-- LEFT COLUMN: EXTRAS -->
         <div class="lg:col-span-4 space-y-6">            <!-- TRILHA SONORA (SPOTIFY) -->
             <div class="glass-panel rounded-3xl p-4 sm:p-6 z-20">
                 <div class="flex items-center justify-between mb-3">
@@ -145,100 +154,6 @@
                     <button onclick="mudarPlaylist()" class="text-[10px] bg-white/10 hover:bg-white/20 px-2 py-1 rounded text-slate-300 uppercase tracking-wider transition-colors"><i class="fa-solid fa-pen mr-1"></i>Trocar</button>
                 </div>
                 <iframe id="spotify-player" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWYBO1MoTDhZI?utm_source=generator&amp;theme=0" width="100%" height="80" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-            </div>
-            
-            
-            
-            <!-- RESUMO WIDGET -->
-            <div class="glass-panel rounded-3xl p-4 sm:p-6 relative overflow-hidden">
-                <div class="absolute -left-10 -bottom-10 w-40 h-40 bg-emerald-500/10 blur-[60px] rounded-full"></div>
-                <h2 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-chart-pie text-emerald-400"></i> Resumo Financeiro
-                </h2>
-                
-                <div class="bg-black/20 rounded-2xl p-5 border border-white/5 mb-6">
-                    <div class="text-slate-400 text-sm font-medium mb-1">Custo Total</div>
-                    <div class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight break-all">R$ <span id="total-geral">0,00</span></div>
-                    <div class="mt-3 flex items-center justify-between border-t border-white/10 pt-3">
-                        <span class="text-sm text-slate-400">Sua parte</span>
-                        <span class="text-emerald-400 font-bold" id="total-por-pessoa">R$ 0,00</span>
-                    </div>
-                    <div id="media-kml-container" class="mt-3 hidden flex items-center justify-between border-t border-white/10 pt-3">
-                        <span class="text-sm text-slate-400"><i class="fa-solid fa-gauge-high text-brand-400 mr-1"></i> Média da Viagem</span>
-                        <span class="text-brand-400 font-bold" id="media-kml">-- Km/L</span>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-2 sm:gap-3">
-                    <div class="bg-white/5 border border-white/5 rounded-xl p-3 flex flex-col">
-                        <span class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1"><i class="fa-solid fa-gas-pump text-orange-400 mr-1"></i>Gasolina</span>
-                        <span class="text-sm font-bold text-white" id="cat-gasolina">R$ 0</span>
-                    </div>
-                    <div class="bg-white/5 border border-white/5 rounded-xl p-3 flex flex-col">
-                        <span class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1"><i class="fa-solid fa-road-barrier text-teal-400 mr-1"></i>Pedágio</span>
-                        <span class="text-sm font-bold text-white" id="cat-pedagio">R$ 0</span>
-                    </div>
-                    <div class="bg-white/5 border border-white/5 rounded-xl p-3 flex flex-col">
-                        <span class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1"><i class="fa-solid fa-burger text-rose-400 mr-1"></i>Comida</span>
-                        <span class="text-sm font-bold text-white" id="cat-comida">R$ 0</span>
-                    </div>
-                    <div class="bg-white/5 border border-white/5 rounded-xl p-3 flex flex-col">
-                        <span class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1"><i class="fa-solid fa-beer-mug-empty text-yellow-400 mr-1"></i>Cachaça</span>
-                        <span class="text-sm font-bold text-white" id="cat-cachaca">R$ 0</span>
-                    </div>
-                    <div class="bg-white/5 border border-white/5 rounded-xl p-3 flex flex-col">
-                        <span class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1"><i class="fa-solid fa-bed text-indigo-400 mr-1"></i>Hospedag.</span>
-                        <span class="text-sm font-bold text-white" id="cat-hospedagem">R$ 0</span>
-                    </div>
-                    <div class="bg-white/5 border border-white/5 rounded-xl p-3 flex flex-col">
-                        <span class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1"><i class="fa-solid fa-box text-slate-400 mr-1"></i>Outros</span>
-                        <span class="text-sm font-bold text-white" id="cat-outros">R$ 0</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ADICIONAR GASTO -->
-            <div class="glass-panel rounded-3xl p-4 sm:p-6">
-                <h2 class="text-lg font-bold text-white mb-5 flex items-center gap-2">
-                    <i class="fa-solid fa-plus-circle text-brand-400"></i> Novo Gasto
-                </h2>
-                
-                <div class="flex flex-wrap gap-2 mb-5">
-                    <button id="cat-btn-Gasolina" onclick="selecionarCategoria('Gasolina')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all-custom bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10"><i class="fa-solid fa-gas-pump mr-1.5 text-orange-400"></i>Gasolina</button>
-                    <button id="cat-btn-Pedágio" onclick="selecionarCategoria('Pedágio')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all-custom bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10"><i class="fa-solid fa-road-barrier mr-1.5 text-teal-400"></i>Pedágio</button>
-                    <button id="cat-btn-Comida" onclick="selecionarCategoria('Comida')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all-custom bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10"><i class="fa-solid fa-burger mr-1.5 text-rose-400"></i>Comida</button>
-                    <button id="cat-btn-Cachaça" onclick="selecionarCategoria('Cachaça')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all-custom bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10"><i class="fa-solid fa-beer-mug-empty mr-1.5 text-yellow-400"></i>Cachaça</button>
-                    <button id="cat-btn-Hospedagem" onclick="selecionarCategoria('Hospedagem')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all-custom bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10"><i class="fa-solid fa-bed mr-1.5 text-indigo-400"></i>Hospedag.</button>
-                    <button id="cat-btn-Outros" onclick="selecionarCategoria('Outros')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all-custom bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10"><i class="fa-solid fa-box mr-1.5 text-slate-400"></i>Outros</button>
-                </div>
-
-                <div class="space-y-4">
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <span class="text-slate-500 font-bold">R$</span>
-                        </div>
-                        <input type="number" id="valor-input" step="0.01" placeholder="0,00" class="w-full bg-black/30 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white font-bold placeholder-slate-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors">
-                    </div>
-                    <!-- Novos campos de gasolina -->
-                    <div id="gasolina-extras" class="flex gap-3 mt-4">
-                        <div class="relative flex-1">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fa-solid fa-gas-pump text-slate-500 text-xs"></i>
-                            </div>
-                            <input type="number" id="litros-input" step="0.01" placeholder="Litros" class="w-full bg-black/30 border border-white/10 rounded-xl py-3 pl-9 pr-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors">
-                        </div>
-                        <div class="relative flex-1">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i class="fa-solid fa-gauge text-slate-500 text-xs"></i>
-                            </div>
-                            <input type="number" id="km-odometro-input" placeholder="KM Painel" class="w-full bg-black/30 border border-white/10 rounded-xl py-3 pl-9 pr-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors">
-                        </div>
-                    </div>
-                    <input type="text" id="desc-input" placeholder="O que foi? (Opcional)" class="w-full bg-black/30 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-slate-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors">
-                    <button onclick="adicionarGasto()" class="w-full bg-gradient-to-r from-brand-500 to-indigo-600 hover:from-brand-400 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-brand-500/20 transition-all-custom flex items-center justify-center gap-2">
-                        Registrar <i class="fa-solid fa-check"></i>
-                    </button>
-                </div>
             </div>
 
             <!-- CHECKLIST -->
@@ -272,21 +187,12 @@
 
         </div>
 
-        <!-- RIGHT COLUMN: TRAJETO E LISTA GASTOS -->
+        <!-- RIGHT COLUMN: CONTEUDO DAS ABAS -->
         <div class="lg:col-span-8 relative">
-            
-            
-            <!-- CONTEUDO: DESTINO DINAMICO -->
-            <div id="conteudo-destino" class="flex flex-col gap-6 hidden" style="display: none;">
-                <!-- Preenchido via JS -->
-            </div>
 
-            <!-- CONTEUDO: NA ESTRADA -->
-            <div id="conteudo-estrada" class="flex flex-col gap-6">
+            <!-- ABA: ROTAS -->
+            <div id="rotas-tab" class="tab-content flex flex-col gap-6">
 
-            
-
-            
             <!-- GPS & NAVEGAÇÃO -->
             <div class="glass-panel rounded-3xl p-4 sm:p-6 relative overflow-visible z-20">
                 <div class="flex flex-col md:flex-row md:items-end gap-4">
@@ -365,21 +271,207 @@
                 </div>
             </div>
 
-            <!-- HISTÓRICO DE GASTOS -->
-            <div class="glass-panel rounded-3xl p-4 sm:p-6 md:p-8">
-                <div class="flex justify-between items-end mb-6 border-b border-white/10 pb-4">
-                    <div>
-                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-receipt text-slate-400"></i> Histórico de Gastos
-                        </h2>
+            </div>
+            <!-- FIM ABA: ROTAS -->
+
+            <!-- ABA: DESTINOS -->
+            <div id="destinos-tab" class="tab-content hidden flex-col gap-6">
+                <div id="conteudo-destino" class="flex flex-col gap-6">
+                    <!-- Preenchido via JS -->
+                    <div class="glass-panel rounded-3xl p-8 text-center text-slate-400">
+                        <i class="fa-solid fa-umbrella-beach text-3xl mb-3 text-brand-400"></i>
+                        <p>Escolha um destino no menu no topo da página pra ver as atrações e anotações daqui.</p>
                     </div>
-                    <div class="text-slate-400 text-sm font-medium" id="qtd-itens">0 itens</div>
-                </div>
-                
-                <div id="lista-gastos" class="space-y-3 max-h-[400px] overflow-y-auto pr-2 pb-2">
-                    <!-- Itens renderizados via JS -->
                 </div>
             </div>
+            <!-- FIM ABA: DESTINOS -->
+
+            <!-- ABA: GASTOS -->
+            <div id="gastos-tab" class="tab-content hidden flex-col gap-6">
+
+                <!-- RESUMO WIDGET -->
+                <div class="glass-panel rounded-3xl p-4 sm:p-6 relative overflow-hidden">
+                    <div class="absolute -left-10 -bottom-10 w-40 h-40 bg-emerald-500/10 blur-[60px] rounded-full"></div>
+                    <h2 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-pie text-emerald-400"></i> Resumo Financeiro
+                    </h2>
+                    
+                    <div class="bg-black/20 rounded-2xl p-5 border border-white/5 mb-6">
+                        <div class="text-slate-400 text-sm font-medium mb-1">Custo Total</div>
+                        <div class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight break-all">R$ <span id="total-gasto">0,00</span></div>
+                        <div class="mt-3 flex items-center justify-between border-t border-white/10 pt-3">
+                            <span class="text-sm text-slate-400">Sua parte</span>
+                            <span class="text-emerald-400 font-bold" id="total-por-pessoa">R$ 0,00</span>
+                        </div>
+                        <div id="media-kml-container" class="mt-3 hidden flex items-center justify-between border-t border-white/10 pt-3">
+                            <span class="text-sm text-slate-400"><i class="fa-solid fa-gauge-high text-brand-400 mr-1"></i> Média da Viagem</span>
+                            <span class="text-brand-400 font-bold" id="media-kml">-- Km/L</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-2 sm:gap-3">
+                        <div class="bg-white/5 border border-white/5 rounded-xl p-3 flex flex-col">
+                            <span class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1"><i class="fa-solid fa-gas-pump text-orange-400 mr-1"></i>Gasolina</span>
+                            <span class="text-sm font-bold text-white" id="cat-gasolina">R$ 0</span>
+                        </div>
+                        <div class="bg-white/5 border border-white/5 rounded-xl p-3 flex flex-col">
+                            <span class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1"><i class="fa-solid fa-road-barrier text-teal-400 mr-1"></i>Pedágio</span>
+                            <span class="text-sm font-bold text-white" id="cat-pedagio">R$ 0</span>
+                        </div>
+                        <div class="bg-white/5 border border-white/5 rounded-xl p-3 flex flex-col">
+                            <span class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1"><i class="fa-solid fa-burger text-rose-400 mr-1"></i>Comida</span>
+                            <span class="text-sm font-bold text-white" id="cat-comida">R$ 0</span>
+                        </div>
+                        <div class="bg-white/5 border border-white/5 rounded-xl p-3 flex flex-col">
+                            <span class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1"><i class="fa-solid fa-beer-mug-empty text-yellow-400 mr-1"></i>Cachaça</span>
+                            <span class="text-sm font-bold text-white" id="cat-cachaca">R$ 0</span>
+                        </div>
+                        <div class="bg-white/5 border border-white/5 rounded-xl p-3 flex flex-col">
+                            <span class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1"><i class="fa-solid fa-bed text-indigo-400 mr-1"></i>Hospedag.</span>
+                            <span class="text-sm font-bold text-white" id="cat-hospedagem">R$ 0</span>
+                        </div>
+                        <div class="bg-white/5 border border-white/5 rounded-xl p-3 flex flex-col">
+                            <span class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1"><i class="fa-solid fa-box text-slate-400 mr-1"></i>Outros</span>
+                            <span class="text-sm font-bold text-white" id="cat-outros">R$ 0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ADICIONAR GASTO -->
+                <div class="glass-panel rounded-3xl p-4 sm:p-6">
+                    <h2 class="text-lg font-bold text-white mb-5 flex items-center gap-2">
+                        <i class="fa-solid fa-plus-circle text-brand-400"></i> Novo Gasto
+                    </h2>
+                    
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <button id="cat-btn-Gasolina" onclick="selecionarCategoria('Gasolina')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all-custom bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10"><i class="fa-solid fa-gas-pump mr-1.5 text-orange-400"></i>Gasolina</button>
+                        <button id="cat-btn-Pedágio" onclick="selecionarCategoria('Pedágio')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all-custom bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10"><i class="fa-solid fa-road-barrier mr-1.5 text-teal-400"></i>Pedágio</button>
+                        <button id="cat-btn-Comida" onclick="selecionarCategoria('Comida')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all-custom bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10"><i class="fa-solid fa-burger mr-1.5 text-rose-400"></i>Comida</button>
+                        <button id="cat-btn-Cachaça" onclick="selecionarCategoria('Cachaça')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all-custom bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10"><i class="fa-solid fa-beer-mug-empty mr-1.5 text-yellow-400"></i>Cachaça</button>
+                        <button id="cat-btn-Hospedagem" onclick="selecionarCategoria('Hospedagem')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all-custom bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10"><i class="fa-solid fa-bed mr-1.5 text-indigo-400"></i>Hospedag.</button>
+                        <button id="cat-btn-Outros" onclick="selecionarCategoria('Outros')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all-custom bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10"><i class="fa-solid fa-box mr-1.5 text-slate-400"></i>Outros</button>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <span class="text-slate-500 font-bold">R$</span>
+                            </div>
+                            <input type="number" id="valor-input" step="0.01" placeholder="0,00" class="w-full bg-black/30 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white font-bold placeholder-slate-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors">
+                        </div>
+                        <!-- Novos campos de gasolina -->
+                        <div id="gasolina-extras" class="flex gap-3 mt-4">
+                            <div class="relative flex-1">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fa-solid fa-gas-pump text-slate-500 text-xs"></i>
+                                </div>
+                                <input type="number" id="litros-input" step="0.01" placeholder="Litros" class="w-full bg-black/30 border border-white/10 rounded-xl py-3 pl-9 pr-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors">
+                            </div>
+                            <div class="relative flex-1">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fa-solid fa-gauge text-slate-500 text-xs"></i>
+                                </div>
+                                <input type="number" id="km-odometro-input" placeholder="KM Painel" class="w-full bg-black/30 border border-white/10 rounded-xl py-3 pl-9 pr-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors">
+                            </div>
+                        </div>
+                        <input type="text" id="desc-input" placeholder="O que foi? (Opcional)" class="w-full bg-black/30 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-slate-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors">
+                        <button onclick="adicionarGasto()" class="w-full bg-gradient-to-r from-brand-500 to-indigo-600 hover:from-brand-400 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-brand-500/20 transition-all-custom flex items-center justify-center gap-2">
+                            Registrar <i class="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- HISTÓRICO DE GASTOS -->
+                <div class="glass-panel rounded-3xl p-4 sm:p-6 md:p-8">
+                    <div class="flex justify-between items-end mb-6 border-b border-white/10 pb-4">
+                        <div>
+                            <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-receipt text-slate-400"></i> Histórico de Gastos
+                            </h2>
+                        </div>
+                        <div class="text-slate-400 text-sm font-medium" id="contador-gastos">0 itens</div>
+                    </div>
+                    
+                    <div id="lista-gastos" class="space-y-3 max-h-[400px] overflow-y-auto pr-2 pb-2">
+                        <!-- Itens renderizados via JS -->
+                    </div>
+                </div>
+
+            </div>
+            <!-- FIM ABA: GASTOS -->
+
+            <!-- ABA: VOLTAR PRA CASA -->
+            <div id="casa-tab" class="tab-content hidden flex-col gap-6">
+                <div class="glass-panel rounded-3xl p-4 sm:p-6 md:p-8">
+                    <h2 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-house-chimney text-brand-400"></i> Voltar pra Casa
+                    </h2>
+                    <p class="text-slate-400 text-sm mb-6">Salve onde você está hospedado (ou onde estacionou) pra achar o caminho de volta depois — mesmo se beber além da conta.</p>
+
+                    <div id="local-salvo-status" class="hidden mb-5 text-emerald-400 font-bold text-sm bg-emerald-500/10 border border-emerald-500/20 rounded-xl px-4 py-3"></div>
+
+                    <div class="space-y-4">
+                        <button onclick="gravarLocalAtual()" class="w-full bg-gradient-to-r from-brand-500 to-indigo-600 hover:from-brand-400 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-brand-500/20 transition-all-custom flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-location-crosshairs"></i> Salvar Minha Localização Atual (GPS)
+                        </button>
+
+                        <div class="flex items-center gap-3 text-slate-500 text-xs uppercase font-bold tracking-wider">
+                            <div class="h-px bg-white/10 flex-1"></div> ou <div class="h-px bg-white/10 flex-1"></div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <input type="text" id="input-endereco-home" placeholder="Endereço da hospedagem ou ponto de referência" class="flex-1 bg-black/30 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-slate-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors">
+                            <button onclick="salvarEnderecoManual()" class="bg-white/10 hover:bg-white/20 border border-white/10 text-white font-bold py-3 px-6 rounded-xl transition-all-custom whitespace-nowrap">
+                                Salvar Endereço
+                            </button>
+                        </div>
+
+                        <div class="flex gap-3 pt-2">
+                            <button onclick="abrirWaze()" class="flex-1 h-12 px-6 rounded-xl bg-blue-500 hover:bg-blue-400 text-white font-bold flex items-center justify-center gap-2 transition-all-custom shadow-lg shadow-blue-500/20">
+                                <i class="fa-brands fa-waze text-xl"></i> Voltar pelo Waze
+                            </button>
+                            <button onclick="abrirGoogleMaps()" class="flex-1 h-12 px-6 rounded-xl bg-green-600 hover:bg-green-500 text-white font-bold flex items-center justify-center gap-2 transition-all-custom shadow-lg shadow-green-500/20">
+                                <i class="fa-solid fa-map-location-dot"></i> Voltar pelo Maps
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- FIM ABA: VOLTAR PRA CASA -->
+
+            <!-- ABA: TEMAS -->
+            <div id="temas-tab" class="tab-content hidden flex-col gap-6">
+                <div class="glass-panel rounded-3xl p-4 sm:p-6 md:p-8">
+                    <h2 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-palette text-brand-400"></i> Temas
+                    </h2>
+                    <p class="text-slate-400 text-sm mb-6">Escolha uma paleta de cores pra combinar com o clima da viagem.</p>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        <button onclick="mudarTema('default')" class="rounded-2xl p-5 text-left border border-white/10 hover:border-emerald-400/50 transition-all-custom bg-gradient-to-br from-slate-900 to-slate-950">
+                            <div class="w-8 h-8 rounded-full mb-3" style="background:#10b981"></div>
+                            <span class="font-bold text-white text-sm">Padrão</span>
+                        </button>
+                        <button onclick="mudarTema('carnaval')" class="rounded-2xl p-5 text-left border border-white/10 hover:border-pink-400/50 transition-all-custom bg-gradient-to-br from-[#1a0b2e] to-[#3b1054]">
+                            <div class="w-8 h-8 rounded-full mb-3" style="background:#ff1493"></div>
+                            <span class="font-bold text-white text-sm">Carnaval</span>
+                        </button>
+                        <button onclick="mudarTema('praia')" class="rounded-2xl p-5 text-left border border-white/10 hover:border-cyan-400/50 transition-all-custom bg-gradient-to-br from-[#021d30] to-[#033f63]">
+                            <div class="w-8 h-8 rounded-full mb-3" style="background:#00ffff"></div>
+                            <span class="font-bold text-white text-sm">Praia</span>
+                        </button>
+                        <button onclick="mudarTema('frio')" class="rounded-2xl p-5 text-left border border-white/10 hover:border-blue-200/50 transition-all-custom bg-gradient-to-br from-[#09121c] to-[#172a45]">
+                            <div class="w-8 h-8 rounded-full mb-3" style="background:#add8e6"></div>
+                            <span class="font-bold text-white text-sm">Frio</span>
+                        </button>
+                        <button onclick="mudarTema('romance')" class="rounded-2xl p-5 text-left border border-white/10 hover:border-pink-300/50 transition-all-custom bg-gradient-to-br from-[#2d0620] to-[#6b1547]">
+                            <div class="w-8 h-8 rounded-full mb-3" style="background:#ff69b4"></div>
+                            <span class="font-bold text-white text-sm">Romance</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- FIM ABA: TEMAS -->
 
         </div>
     </div>
@@ -1832,37 +1924,6 @@
             }
         }
 
-        function switchTab(tab) {
-            const btnEstrada = document.getElementById('btn-tab-estrada');
-            const btnDestino = document.getElementById('btn-tab-destino');
-            const contEstrada = document.getElementById('conteudo-estrada');
-            const contDestino = document.getElementById('conteudo-destino');
-
-            if (tab === 'estrada') {
-                btnEstrada.className = "px-6 py-3 rounded-xl font-bold transition-all-custom bg-brand-500 text-white shadow-lg shadow-brand-500/30 flex items-center gap-2";
-                btnDestino.className = "px-6 py-3 rounded-xl font-bold transition-all-custom bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white flex items-center gap-2";
-                contEstrada.classList.remove('hidden'); contEstrada.style.display = 'flex';
-                contDestino.classList.add('hidden'); contDestino.style.display = 'none';
-            } else {
-                btnDestino.className = "px-6 py-3 rounded-xl font-bold transition-all-custom bg-brand-500 text-white shadow-lg shadow-brand-500/30 flex items-center gap-2";
-                btnEstrada.className = "px-6 py-3 rounded-xl font-bold transition-all-custom bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white flex items-center gap-2";
-                contDestino.classList.remove('hidden'); contDestino.style.display = 'flex';
-                contEstrada.classList.add('hidden'); contEstrada.style.display = 'none';
-            }
-
-            // Rolar a tela no celular para mostrar que a aba mudou!
-            setTimeout(() => {
-                if (window.innerWidth < 1024) {
-                    if (tab === 'estrada') {
-                        contEstrada.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    } else {
-                        contDestino.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
-            }, 100);
-    
-        }
-
         function salvarTurismo() {
             const state = {};
             for (let i = 1; i <= 6; i++) {
@@ -1897,6 +1958,40 @@
         }
 
     
+
+// --- TABS LOGIC (5 abas: rotas, destinos, gastos, casa, temas) ---
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => {
+        el.classList.add('hidden');
+        el.classList.remove('flex');
+    });
+    const target = document.getElementById(tabId + '-tab');
+    if (target) {
+        target.classList.remove('hidden');
+        target.classList.add('flex');
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active', 'bg-brand-500', 'text-white', 'shadow-lg', 'shadow-brand-500/30');
+        btn.classList.add('bg-white/5', 'border', 'border-white/10', 'text-slate-300');
+    });
+    const activeBtn = document.getElementById('btn-tab-' + tabId);
+    if (activeBtn) {
+        activeBtn.classList.add('active', 'bg-brand-500', 'text-white', 'shadow-lg', 'shadow-brand-500/30');
+        activeBtn.classList.remove('bg-white/5', 'border', 'border-white/10', 'text-slate-300');
+    }
+
+    // Rolar a tela no celular para mostrar que a aba mudou!
+    if (target) {
+        setTimeout(() => {
+            if (window.innerWidth < 1024) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }, 100);
+    }
+}
+
+// (módulo antigo de gastos removido — ver adicionarGasto/renderizarGastos acima)
 
 // --- ABA VOLTAR PARA CASA ---
 let homeLat = localStorage.getItem('viagem_home_lat');
