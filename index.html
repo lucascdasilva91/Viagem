@@ -2429,22 +2429,144 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
 
+
+<div id="voltar-tab" class="tab-content hidden space-y-4">
+    <div class="glass-panel p-5 rounded-3xl">
+        <h2 class="text-xl font-bold text-white mb-2"><i class="fa-solid fa-house-medical text-rose-400 mr-2"></i>Voltar pra Casa Seguro</h2>
+        <p class="text-slate-400 text-sm mb-6">Salve a localização da sua hospedagem agora, para poder voltar com facilidade quando estiver bêbado! 🍻</p>
+
+        <div class="space-y-4">
+            <button onclick="gravarLocalAtual()" class="w-full h-14 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-2xl flex items-center justify-center gap-3 transition-colors shadow-lg shadow-brand-500/20">
+                <i class="fa-solid fa-location-crosshairs text-xl"></i> Gravar Minha Localização Atual (GPS)
+            </button>
+
+            <div class="relative">
+                <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-white/10"></div></div>
+                <div class="relative flex justify-center text-sm"><span class="px-2 bg-slate-900 text-slate-500">ou digite o endereço</span></div>
+            </div>
+
+            <div class="flex gap-2">
+                <input type="text" id="input-endereco-home" placeholder="Rua, Número, Cidade" class="flex-1 h-14 bg-white/5 border border-white/10 rounded-2xl px-4 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500">
+                <button onclick="salvarEnderecoManual()" class="h-14 px-6 bg-white/10 hover:bg-white/20 text-white font-bold rounded-2xl transition-colors">
+                    Salvar
+                </button>
+            </div>
+            
+            <p id="local-salvo-status" class="text-emerald-400 text-sm font-medium mt-2 hidden"><i class="fa-solid fa-check-circle mr-1"></i>Localização salva!</p>
+
+            <div class="pt-6 mt-6 border-t border-white/10 space-y-3">
+                <button onclick="abrirWaze()" class="w-full h-16 bg-[#33ccff] hover:bg-[#2eb8e6] text-slate-900 font-extrabold rounded-2xl flex items-center justify-center gap-3 transition-colors shadow-lg shadow-[#33ccff]/20 text-lg">
+                    <i class="fa-brands fa-waze text-2xl"></i> Navegar com Waze
+                </button>
+                <button onclick="abrirGoogleMaps()" class="w-full h-16 bg-[#34a853] hover:bg-[#2d9147] text-white font-extrabold rounded-2xl flex items-center justify-center gap-3 transition-colors shadow-lg shadow-[#34a853]/20 text-lg">
+                    <i class="fa-solid fa-map text-2xl"></i> Navegar com Google Maps
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-slate-900/90 backdrop-blur-lg border-t border-white/10 flex justify-around p-2 z-50 pb-safe">
-    <button onclick="switchTab('rota')" id="btn-tab-rota" class="tab-btn text-emerald-400 flex flex-col items-center p-2 transition-colors w-1/4">
+    <button onclick="switchTab('rota')" id="btn-tab-rota" class="tab-btn text-emerald-400 flex flex-col items-center p-2 transition-colors flex-1">
         <i class="fa-solid fa-route text-xl mb-1"></i>
         <span class="text-[10px] font-medium">Rota</span>
     </button>
-    <button onclick="switchTab('destinos')" id="btn-tab-destinos" class="tab-btn text-slate-400 hover:text-slate-200 flex flex-col items-center p-2 transition-colors w-1/4">
+    <button onclick="switchTab('destinos')" id="btn-tab-destinos" class="tab-btn text-slate-400 hover:text-slate-200 flex flex-col items-center p-2 transition-colors flex-1">
         <i class="fa-solid fa-map-location-dot text-xl mb-1"></i>
         <span class="text-[10px] font-medium">Destinos</span>
     </button>
-    <button onclick="switchTab('gastos')" id="btn-tab-gastos" class="tab-btn text-slate-400 hover:text-slate-200 flex flex-col items-center p-2 transition-colors w-1/4">
+    <button onclick="switchTab('gastos')" id="btn-tab-gastos" class="tab-btn text-slate-400 hover:text-slate-200 flex flex-col items-center p-2 transition-colors flex-1">
         <i class="fa-solid fa-wallet text-xl mb-1"></i>
         <span class="text-[10px] font-medium">Gastos</span>
     </button>
-    <button onclick="switchTab('config')" id="btn-tab-config" class="tab-btn text-slate-400 hover:text-slate-200 flex flex-col items-center p-2 transition-colors w-1/4">
+    <button onclick="switchTab('voltar')" id="btn-tab-voltar" class="tab-btn text-slate-400 hover:text-slate-200 flex flex-col items-center p-2 transition-colors flex-1">
+        <i class="fa-solid fa-bed text-xl mb-1"></i>
+        <span class="text-[10px] font-medium">Voltar</span>
+    </button>
+    <button onclick="switchTab('config')" id="btn-tab-config" class="tab-btn text-slate-400 hover:text-slate-200 flex flex-col items-center p-2 transition-colors flex-1">
         <i class="fa-solid fa-palette text-xl mb-1"></i>
         <span class="text-[10px] font-medium">Tema</span>
     </button>
 </div>
+
+<script>
+let homeLat = localStorage.getItem('viagem_home_lat');
+let homeLng = localStorage.getItem('viagem_home_lng');
+let homeAddr = localStorage.getItem('viagem_home_addr');
+
+function gravarLocalAtual() {
+    if (!navigator.geolocation) {
+        alert("Geolocalização não é suportada no seu navegador.");
+        return;
+    }
+    navigator.geolocation.getCurrentPosition((pos) => {
+        homeLat = pos.coords.latitude;
+        homeLng = pos.coords.longitude;
+        homeAddr = ""; // clear manual if gps is used
+        localStorage.setItem('viagem_home_lat', homeLat);
+        localStorage.setItem('viagem_home_lng', homeLng);
+        localStorage.removeItem('viagem_home_addr');
+        document.getElementById('local-salvo-status').classList.remove('hidden');
+        document.getElementById('local-salvo-status').innerHTML = '<i class="fa-solid fa-check-circle mr-1"></i>Localização GPS salva!';
+        alert("GPS salvo! Agora você não se perde mais bebasso.");
+    }, (err) => {
+        alert("Erro ao pegar localização: " + err.message);
+    });
+}
+
+function salvarEnderecoManual() {
+    const val = document.getElementById('input-endereco-home').value;
+    if (val) {
+        homeAddr = val;
+        homeLat = null;
+        homeLng = null;
+        localStorage.setItem('viagem_home_addr', homeAddr);
+        localStorage.removeItem('viagem_home_lat');
+        localStorage.removeItem('viagem_home_lng');
+        document.getElementById('local-salvo-status').classList.remove('hidden');
+        document.getElementById('local-salvo-status').innerHTML = '<i class="fa-solid fa-check-circle mr-1"></i>Endereço salvo!';
+        alert("Endereço salvo!");
+    }
+}
+
+function abrirWaze() {
+    if (homeLat && homeLng) {
+        window.open(`https://waze.com/ul?ll=${homeLat},${homeLng}&navigate=yes`, '_blank');
+    } else if (homeAddr) {
+        window.open(`https://waze.com/ul?q=${encodeURIComponent(homeAddr)}&navigate=yes`, '_blank');
+    } else {
+        alert("Salve sua hospedagem ou localização primeiro!");
+    }
+}
+
+function abrirGoogleMaps() {
+    if (homeLat && homeLng) {
+        window.open(`https://www.google.com/maps/dir/?api=1&destination=${homeLat},${homeLng}`, '_blank');
+    } else if (homeAddr) {
+        window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(homeAddr)}`, '_blank');
+    } else {
+        alert("Salve sua hospedagem ou localização primeiro!");
+    }
+}
+
+// Show status on load if exists
+window.addEventListener('load', () => {
+    if (homeLat && homeLng) {
+        const el = document.getElementById('local-salvo-status');
+        if (el) {
+            el.classList.remove('hidden');
+            el.innerHTML = '<i class="fa-solid fa-check-circle mr-1"></i>Localização GPS já salva!';
+        }
+    } else if (homeAddr) {
+        const el = document.getElementById('local-salvo-status');
+        const input = document.getElementById('input-endereco-home');
+        if (el) {
+            el.classList.remove('hidden');
+            el.innerHTML = '<i class="fa-solid fa-check-circle mr-1"></i>Endereço já salvo!';
+        }
+        if (input) input.value = homeAddr;
+    }
+});
+</script>
+
 </body></html>
