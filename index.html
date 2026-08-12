@@ -606,10 +606,21 @@
                 alert("Por favor, selecione o destino no menu superior primeiro!");
                 return;
             }
-            if (confirm(`Deseja carregar a rota sugerida de carro para ${destinosInfo[idDestino].nome}?
-
-ISSO VAI APAGAR O TRAJETO ATUAL.`)) {
-                trajeto = [...destinosInfo[idDestino].rota];
+            if (confirm(`Deseja carregar a rota sugerida de carro para ${destinosInfo[idDestino].nome}?\n\nISSO VAI APAGAR O TRAJETO ATUAL.`)) {
+                trajeto = destinosInfo[idDestino].rota.map((p, index) => {
+                    return { 
+                        id: Date.now() + index, 
+                        cidade: p.nome, 
+                        horaPrevista: 'A Definir', 
+                        horaReal: null, 
+                        statusMsg: null, 
+                        statusCode: 'pending', 
+                        kmTotal: 0, 
+                        curiosidade: '', 
+                        lat: null, 
+                        lon: null 
+                    };
+                });
                 salvarTrajeto();
                 renderizarTrajeto();
                 mostrarToast("Rota de Ida carregada! 🚗");
@@ -617,13 +628,11 @@ ISSO VAI APAGAR O TRAJETO ATUAL.`)) {
         }
 
         function carregarRotaVoltaDinamica() {
-            if (confirm("Deseja carregar a rota de volta para Brasília?
-
-ISSO VAI APAGAR O TRAJETO ATUAL.")) {
+            if (confirm("Deseja carregar a rota de volta para Brasília?\n\nISSO VAI APAGAR O TRAJETO ATUAL.")) {
                 trajeto = [
-                    { nome: "Saída do Destino", concluido: false },
-                    { nome: "Parada no Meio do Caminho", concluido: false },
-                    { nome: "Chegada em Brasília (BSB) 🏠", concluido: false }
+                    { id: Date.now(), cidade: "Saída do Destino", horaPrevista: 'A Definir', horaReal: null, statusMsg: null, statusCode: 'pending', kmTotal: 0, curiosidade: '', lat: null, lon: null },
+                    { id: Date.now()+1, cidade: "Parada no Meio do Caminho", horaPrevista: 'A Definir', horaReal: null, statusMsg: null, statusCode: 'pending', kmTotal: 0, curiosidade: '', lat: null, lon: null },
+                    { id: Date.now()+2, cidade: "Chegada em Brasília (BSB) 🏠", horaPrevista: 'A Definir', horaReal: null, statusMsg: null, statusCode: 'pending', kmTotal: 0, curiosidade: '', lat: null, lon: null }
                 ];
                 salvarTrajeto();
                 renderizarTrajeto();
