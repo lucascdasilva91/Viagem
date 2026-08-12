@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com">
-        `
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
         // --- PARADAS ESTRATÉGICAS (ALIMENTAÇÃO) ---
-        let cidadeCafeAtual = ""
-</script>
+        let cidadeCafeAtual = "";
+    </script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -105,51 +105,7 @@
                 </button>
             </nav>
             
-            <div class="p-4 border-t border-white/10 space-y-3 mt-auto" id="sidebar-config-area">
-            <div class="glass-panel rounded-3xl md:p-8 flex flex-col justify-between items-center gap-4 sm:gap-6 relative overflow-hidden group p-3 sm:p-4">
-            <div class="absolute -right-20 -top-20 w-64 h-64 bg-brand-500/20 blur-[80px] rounded-full group-hover:bg-brand-400/30 transition-all duration-700"></div>
             
-            <div class="flex items-center gap-5 z-10">
-                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-400 to-indigo-600 flex items-center justify-center shadow-xl shadow-brand-500/20">
-                    <i class="fa-solid fa-map-location-dot text-3xl text-white"></i>
-                </div>
-                <div>
-                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400 tracking-tight" id="titulo-app">Programação Viagem</h1>
-                    <p class="text-slate-400 font-medium tracking-wide flex items-center gap-2 mt-1">
-                        <span id="status-pessoas" class="bg-white/10 px-2 py-0.5 rounded-md text-xs">1 viajante</span>
-                        <span>Controle de gastos e rota</span>
-                    </p>
-                </div>
-            </div>
-            
-            <div class="flex gap-3 z-10 flex-wrap justify-end">
-                <select id="seletor-destino" onchange="selecionarDestino(this.value)" class="h-12 rounded-xl bg-brand-600 border border-brand-400 hover:bg-brand-500 text-white font-bold px-4 focus:outline-none cursor-pointer shadow-lg shadow-brand-500/20">
-                    <option value="" disabled="" selected="">Escolha o Destino</option>
-                    <option value="guriri">Guriri - ES</option>
-                    <option value="guarapari">Guarapari - ES</option>
-                    <option value="prado">Prado - BA</option>
-                    <option value="cabofrio">Cabo Frio - RJ</option>
-                    <option value="saoluis">São Luís - MA</option>
-                    <option value="codo">Codó - MA</option>
-                    <option value="ubatuba">Ubatuba - SP</option>
-                    <option value="maceio">Maceió - AL</option>
-                </select>
-    
-                <button onclick="toggleTheme()" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 flex items-center justify-center transition-all-custom group">
-                    <i id="theme-icon" class="fa-solid fa-moon text-slate-400 group-hover:text-yellow-400 transition-colors"></i>
-                </button>
-                <button onclick="configurarPessoas()" class="px-5 h-12 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 flex items-center gap-2 font-bold transition-all-custom">
-                    <i class="fa-solid fa-users text-brand-400"></i>
-                    <span id="btn-qtd-pessoas" class="text-white">1</span>
-                </button>
-                <button onclick="exportarBackup()" class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20 flex items-center justify-center transition-all-custom group" title="Fazer Backup (Salvar offline)">
-                    <i class="fa-solid fa-download text-emerald-400"></i>
-                </button>
-                <button onclick="limparDados()" class="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/20 hover:bg-rose-500/20 flex items-center justify-center transition-all-custom group" title="Zerar Viagem">
-                    <i class="fa-solid fa-power-off text-rose-400 group-hover:text-rose-300"></i>
-                </button>
-            </div>
-        </div></div>
         </div>
     </aside>
 
@@ -161,7 +117,51 @@
 
     <!-- MAIN CONTENT -->
     <main class="flex-1 relative z-10 h-full overflow-y-auto pt-24 pt-8 pb-20 px-4 sm:px-6 md:px-8" id="main-content">
-        <div class="max-w-4xl mx-auto w-full">
+        <div class="max-w-4xl mx-auto w-full"><div class="p-4 border-t border-white/10 space-y-3 mt-auto" id="sidebar-config-area">
+            <div class="glass-panel rounded-3xl flex flex-col justify-between items-center relative overflow-hidden group p-4 gap-3">
+            <div class="absolute bg-brand-500/20 blur-[80px] rounded-full group-hover:bg-brand-400/30 transition-all duration-700 w-32 h-32 -right-10 -top-10 blur-2xl"></div>
+            
+            <div class="flex items-center gap-5 z-10">
+                <div class="bg-gradient-to-br from-brand-400 to-indigo-600 flex items-center justify-center shadow-xl shadow-brand-500/20 w-12 rounded-xl h-10">
+                    <i class="fa-solid fa-map-location-dot text-white text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400 tracking-tight text-lg sm:text-xl md:text-2xl" id="titulo-app">Programação Viagem</h1>
+                    <p class="text-slate-400 font-medium tracking-wide flex items-center gap-2 mt-1">
+                        <span id="status-pessoas" class="bg-white/10 px-2 py-0.5 rounded-md text-xs">1 viajante</span>
+                        <span>Controle de gastos e rota</span>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="flex gap-3 z-10 flex-wrap justify-end">
+                <select id="seletor-destino" onchange="selecionarDestino(this.value)" class="rounded-xl bg-brand-600 border border-brand-400 hover:bg-brand-500 text-white font-bold px-4 focus:outline-none cursor-pointer shadow-lg shadow-brand-500/20 h-10">
+                    <option value="" disabled="" selected="">Escolha o Destino</option>
+                    <option value="guriri">Guriri - ES</option>
+                    <option value="guarapari">Guarapari - ES</option>
+                    <option value="prado">Prado - BA</option>
+                    <option value="cabofrio">Cabo Frio - RJ</option>
+                    <option value="saoluis">São Luís - MA</option>
+                    <option value="codo">Codó - MA</option>
+                    <option value="ubatuba">Ubatuba - SP</option>
+                    <option value="maceio">Maceió - AL</option>
+                </select>
+    
+                <button onclick="toggleTheme()" class="w-12 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 flex items-center justify-center transition-all-custom group h-10">
+                    <i id="theme-icon" class="fa-solid fa-moon text-slate-400 group-hover:text-yellow-400 transition-colors"></i>
+                </button>
+                <button onclick="configurarPessoas()" class="px-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 flex items-center gap-2 font-bold transition-all-custom h-10">
+                    <i class="fa-solid fa-users text-brand-400"></i>
+                    <span id="btn-qtd-pessoas" class="text-white">1</span>
+                </button>
+                <button onclick="exportarBackup()" class="w-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20 flex items-center justify-center transition-all-custom group h-10" title="Fazer Backup (Salvar offline)">
+                    <i class="fa-solid fa-download text-emerald-400"></i>
+                </button>
+                <button onclick="limparDados()" class="w-12 rounded-xl bg-rose-500/10 border border-rose-500/20 hover:bg-rose-500/20 flex items-center justify-center transition-all-custom group h-10" title="Zerar Viagem">
+                    <i class="fa-solid fa-power-off text-rose-400 group-hover:text-rose-300"></i>
+                </button>
+            </div>
+        </div></div>
             <div id="rota-tab" class="tab-content space-y-4"><section id="view-trajeto" class="view-section block animate-fade-in space-y-6"><div class="bg-brand-900/40 border border-brand-500/30 rounded-2xl p-2 md:p-3 mb-2 flex flex-col sm:flex-row items-center gap-2">
                     <div class="flex-1">
                         <h3 class="text-white font-bold flex items-center gap-2"><i class="fa-solid fa-clock text-brand-400"></i> Previsão de Chegada</h3>
@@ -1049,10 +1049,13 @@ ISSO VAI APAGAR O TRAJETO ATUAL.`)) {
         // Load on start
         window.addEventListener('load', () => {
             const savedDestino = localStorage.getItem('viagem_destino_id');
+            const select = document.getElementById('seletor-destino');
             if(savedDestino) {
-                const select = document.getElementById('seletor-destino');
                 if(select) select.value = savedDestino;
                 selecionarDestino(savedDestino);
+            } else if (select && select.value) {
+                // If no saved destination, force load the default one so the tab isn't empty!
+                selecionarDestino(select.value);
             }
         });
     
