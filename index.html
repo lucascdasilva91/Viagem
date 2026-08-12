@@ -1142,11 +1142,11 @@
             if (totalPessoaEl) totalPessoaEl.innerText = `R$ ${(totalGeral / qtdPessoas).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
             if (qtdItensEl) qtdItensEl.innerText = `${gastos.length} ${gastos.length === 1 ? 'item' : 'itens'}`;
 
-            document.getElementById('cat-gasolina')?.innerText = `R$ ${(totCat.Gasolina || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
-            document.getElementById('cat-cachaca')?.innerText = `R$ ${(totCat.Cachaça || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
-            document.getElementById('cat-comida')?.innerText = `R$ ${(totCat.Comida || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
-            document.getElementById('cat-hospedagem')?.innerText = `R$ ${(totCat.Hospedagem || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
-            document.getElementById('cat-pedagio')?.innerText = `R$ ${(totCat.Pedágio || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
+            const el_cat_gasolina = document.getElementById('cat-gasolina'); if (el_cat_gasolina) el_cat_gasolina.innerText = `R$ ${(totCat.Gasolina || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
+            const el_cat_cachaca = document.getElementById('cat-cachaca'); if (el_cat_cachaca) el_cat_cachaca.innerText = `R$ ${(totCat.Cachaça || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
+            const el_cat_comida = document.getElementById('cat-comida'); if (el_cat_comida) el_cat_comida.innerText = `R$ ${(totCat.Comida || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
+            const el_cat_hospedagem = document.getElementById('cat-hospedagem'); if (el_cat_hospedagem) el_cat_hospedagem.innerText = `R$ ${(totCat.Hospedagem || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
+            const el_cat_pedagio = document.getElementById('cat-pedagio'); if (el_cat_pedagio) el_cat_pedagio.innerText = `R$ ${(totCat.Pedágio || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
 
             // Cálculo KM/L
             const gasEntries = gastos.filter(g => g.categoria === 'Gasolina' && g.kmOdo && g.litros).sort((a,b) => a.kmOdo - b.kmOdo);
@@ -1167,7 +1167,7 @@
                 kmlContainer.classList.add('hidden');
             }
 
-            document.getElementById('cat-outros')?.innerText = `R$ ${(totCat.Outros || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
+            const el_cat_outros = document.getElementById('cat-outros'); if (el_cat_outros) el_cat_outros.innerText = `R$ ${(totCat.Outros || 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
         }
 
         // --- MÓDULO: DIÁRIO DE BORDO ---
