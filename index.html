@@ -162,7 +162,7 @@
     <!-- MAIN CONTENT -->
     <main class="flex-1 relative z-10 h-full overflow-y-auto pt-24 lg:pt-8 pb-20 px-4 sm:px-6 md:px-8" id="main-content">
         <div class="max-w-4xl mx-auto w-full">
-            <section id="view-trajeto" class="view-section block animate-fade-in space-y-6"><div class="bg-brand-900/40 border border-brand-500/30 rounded-2xl p-4 md:p-5 mb-4 flex flex-col sm:flex-row items-center gap-4">
+            <div id="rota-tab" class="tab-content space-y-4"><section id="view-trajeto" class="view-section block animate-fade-in space-y-6"><div class="bg-brand-900/40 border border-brand-500/30 rounded-2xl p-4 md:p-5 mb-4 flex flex-col sm:flex-row items-center gap-4">
                     <div class="flex-1">
                         <h3 class="text-white font-bold flex items-center gap-2"><i class="fa-solid fa-clock text-brand-400"></i> Previsão de Chegada</h3>
                         <p class="text-xs text-slate-400 mt-1">Insira a hora de saída para calcular quando passarão por cada cidade.</p>
@@ -207,8 +207,7 @@
                 <div class="relative border-l-2 border-slate-800 ml-3 md:ml-4 space-y-6" id="lista-trajeto">
                     <!-- Itens renderizados via JS -->
                 </div>
-            </div><div id="conteudo-destino" class="flex flex-col gap-6 mt-8 w-full"></div></section>
-            <section id="view-gastos" class="view-section hidden animate-fade-in space-y-6">
+            </div><div id="conteudo-destino" class="flex flex-col gap-6 mt-8 w-full"></div></section><section id="view-gastos" class="view-section hidden animate-fade-in space-y-6">
 <!-- RESUMO WIDGET -->
 <div class="glass-panel rounded-3xl z-20 p-3 sm:p-4">
     <div class="flex items-center justify-between mb-4">
@@ -304,8 +303,7 @@
         <!-- Itens renderizados via JS -->
     </div>
 </div>
-</section>
-            <section id="view-alimentacao" class="view-section hidden animate-fade-in space-y-6"><div class="glass-panel rounded-3xl z-20 p-3 sm:p-4">
+</section><section id="view-alimentacao" class="view-section hidden animate-fade-in space-y-6"><div class="glass-panel rounded-3xl z-20 p-3 sm:p-4">
                 <div class="flex items-center justify-between mb-3">
                     <h2 class="text-sm font-bold text-white flex items-center gap-2 text-lg">
                         <i class="fa-solid fa-utensils text-orange-400 text-lg"></i> Alimentação na Rota
@@ -339,8 +337,7 @@
                         <div id="restaurante-salvo-almoco" class="mt-2 text-xs text-emerald-400 font-medium hidden text-center truncate bg-emerald-500/10 rounded py-1 px-2 border border-emerald-500/20"></div>
                     </div>
                 </div>
-            </div></section>
-            <section id="view-musica" class="view-section hidden animate-fade-in space-y-6"><div class="glass-panel rounded-3xl z-20 p-3 sm:p-4">
+            </div></section><section id="view-musica" class="view-section hidden animate-fade-in space-y-6"><div class="glass-panel rounded-3xl z-20 p-3 sm:p-4">
                 <div class="flex items-center justify-between mb-3">
                     <h2 class="text-sm font-bold text-white flex items-center gap-2 text-lg">
                         <i class="fa-brands fa-spotify text-green-400 text-lg"></i> Trilha Sonora (Road Trip)
@@ -351,8 +348,86 @@
                     </div>
                 </div>
                 <iframe id="spotify-player" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWYBO1MoTDhZI?utm_source=generator&amp;theme=0" width="100%" height="80" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-            </div></section>
+            </div></section></div>
+            
+            
+            
+        
+    <div id="gastos-tab" class="tab-content hidden space-y-4">
+        <div class="glass-panel rounded-3xl p-4">
+            <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-wallet text-emerald-400"></i> Controle de Gastos
+            </h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 mb-1">Orçamento Total (R$)</label>
+                    <input type="number" id="orcamento-total" class="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500/50 transition-colors" placeholder="Ex: 2000" onchange="atualizarGastos()">
+                </div>
+                
+                <div class="bg-black/20 rounded-xl p-3 border border-white/5">
+                    <div class="flex justify-between text-xs mb-1">
+                        <span class="text-slate-300">Gasto Atual</span>
+                        <span id="gasto-atual-texto" class="text-emerald-400 font-bold">R$ 0,00</span>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-2">
+                        <div id="gasto-barra" class="bg-emerald-500 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                    <div class="text-right mt-1">
+                        <span id="saldo-restante" class="text-[10px] text-slate-400">Restante: R$ 0,00</span>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <h3 class="text-sm font-medium text-white mb-2">Adicionar Gasto</h3>
+                    <select id="gasto-categoria" class="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500/50 transition-colors mb-2">
+                        <option value="gasolina">Gasolina</option>
+                        <option value="comida">Comida</option>
+                        <option value="pedagio">Pedágio</option>
+                        <option value="hospedagem">Hospedagem</option>
+                        <option value="diversos">Diversos</option>
+                    </select>
+                    <div class="flex gap-2">
+                        <input type="text" id="gasto-descricao" class="flex-1 bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none" placeholder="Descrição">
+                        <input type="number" id="gasto-valor" class="w-24 bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none" placeholder="R$">
+                    </div>
+                    <button onclick="adicionarGasto()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-lg mt-2">
+                        Registrar Gasto
+                    </button>
+                </div>
+
+                <div class="mt-4">
+                    <h3 class="text-sm font-medium text-white mb-2">Histórico</h3>
+                    <div id="lista-gastos" class="space-y-2 max-h-40 overflow-y-auto pr-1"></div>
+                </div>
+            </div>
         </div>
+    </div>
+    
+    <div id="config-tab" class="tab-content hidden space-y-4">
+        <div class="glass-panel rounded-3xl p-4">
+            <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-palette text-purple-400"></i> Tema Visual
+            </h2>
+            <div class="grid grid-cols-2 gap-3">
+                <button onclick="mudarTema('default')" class="tema-btn bg-slate-800 border-2 border-emerald-500/50 p-3 rounded-xl flex flex-col items-center justify-center gap-2 transition-all">
+                    <div class="w-6 h-6 rounded-full bg-emerald-500"></div> <span class="text-sm text-white font-medium">Padrão</span>
+                </button>
+                <button onclick="mudarTema('ocean')" class="tema-btn bg-slate-800 border-2 border-transparent p-3 rounded-xl flex flex-col items-center justify-center gap-2 transition-all">
+                    <div class="w-6 h-6 rounded-full bg-blue-500"></div> <span class="text-sm text-white font-medium">Oceano</span>
+                </button>
+                <button onclick="mudarTema('sunset')" class="tema-btn bg-slate-800 border-2 border-transparent p-3 rounded-xl flex flex-col items-center justify-center gap-2 transition-all">
+                    <div class="w-6 h-6 rounded-full bg-orange-500"></div> <span class="text-sm text-white font-medium">Pôr do Sol</span>
+                </button>
+                <button onclick="mudarTema('nature')" class="tema-btn bg-slate-800 border-2 border-transparent p-3 rounded-xl flex flex-col items-center justify-center gap-2 transition-all">
+                    <div class="w-6 h-6 rounded-full bg-green-500"></div> <span class="text-sm text-white font-medium">Natureza</span>
+                </button>
+                <button onclick="mudarTema('night')" class="tema-btn bg-slate-800 border-2 border-transparent p-3 rounded-xl flex flex-col items-center justify-center gap-2 transition-all col-span-2">
+                    <div class="w-6 h-6 rounded-full bg-purple-500"></div> <span class="text-sm text-white font-medium">Noturno</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
     </main>
 
 
