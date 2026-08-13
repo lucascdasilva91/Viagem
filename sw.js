@@ -1,8 +1,9 @@
-const CACHE_NAME = 'travel-app-v1';
+const CACHE_NAME = 'travel-app-v2';
 const urlsToCache = [
   './',
   './index.html',
   './manifest.json',
+  './icon.jpg',
   './bg-day.png',
   './bg-night.png',
   'https://cdn.tailwindcss.com',
