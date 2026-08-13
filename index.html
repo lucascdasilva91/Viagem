@@ -129,12 +129,6 @@
                 line-height: 1 !important;
             }
 
-            /* Keep the four main app sections in the bottom bar.
-               "Voltar pra Casa" remains available on desktop. */
-            .mobile-tab-navigation #btn-tab-casa {
-                display: none !important;
-            }
-
             .mobile-tab-navigation .tab-btn.active {
                 background: rgba(14,165,233,0.18) !important;
                 border-color: rgba(56,189,248,0.30) !important;
@@ -227,8 +221,8 @@
             <button id="btn-tab-gastos" onclick="switchTab('gastos')" class="tab-btn px-5 py-2.5 rounded-xl font-bold transition-all-custom flex items-center gap-2 text-sm sm:text-base bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white">
                 <i class="fa-solid fa-wallet"></i> Gastos
             </button>
-            <button id="btn-tab-casa" onclick="switchTab('casa')" class="tab-btn px-5 py-2.5 rounded-xl font-bold transition-all-custom flex items-center gap-2 text-sm sm:text-base bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white">
-                <i class="fa-solid fa-house-chimney"></i> Voltar pra Casa
+            <button id="btn-tab-casa" onclick="switchTab('casa')" title="Voltar pra Casa / Localização" class="tab-btn px-5 py-2.5 rounded-xl font-bold transition-all-custom flex items-center gap-2 text-sm sm:text-base bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white">
+                <i class="fa-solid fa-house-chimney"></i> <span class="hidden sm:inline">Voltar pra </span>Casa
             </button>
             <button id="btn-tab-temas" onclick="switchTab('temas')" class="tab-btn px-5 py-2.5 rounded-xl font-bold transition-all-custom flex items-center gap-2 text-sm sm:text-base bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white">
                 <i class="fa-solid fa-palette"></i> Temas
